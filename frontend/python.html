@@ -1,0 +1,661 @@
+
+<html>
+    <head>
+        <title>Aws And Devops Course</title>
+        <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+    
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        <style>
+            body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+      min-height: 100vh;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Header Glass Style */
+    header {
+      background: rgba(0, 11, 36, 0.5);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    header a:hover {
+      color: #00b7ff;
+    }
+
+    /* Course Card Glass Style */
+    .course-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      overflow: hidden;
+      width: 320px;
+      margin: 2rem auto;
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .course-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #ff4757;
+      color: #fff;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      border-radius: 20px;
+      z-index: 1;
+    }
+
+    .course-image-container {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+    }
+
+    .course-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .course-content {
+      padding: 1.2rem;
+    }
+
+    .course-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .course-instructor {
+      font-size: 0.9rem;
+      color: white;
+      margin-bottom: 0.75rem;
+    }
+
+    .course-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      color:white;
+    }
+
+    .course-rating {
+      color: #f39c12;
+    }
+
+    .btn {
+      border: none;
+      padding: 0.5rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s ease;
+    }
+
+    .btn-sm {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.75rem;
+    }
+
+    .btn-primary {
+      background: rgba(9, 84, 214, 0.25);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: rgba(35, 201, 231, 0.4);
+    }
+
+    .btn-outline {
+      border: 1px solid #ccc;
+      background: rgba(9, 84, 214, 0.25);
+      color: #fff;
+    }
+
+    .btn-outline:hover {
+      background: rgba(35, 201, 231, 0.4);
+      color: #000;
+    }
+
+    
+    .btn-icon {
+      padding: 0.5rem;
+      border-radius: 50%;
+      font-size: 1rem;
+    }
+
+    /* Glass Modal */
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+    .modal-content {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    color: #fff;
+    
+  }
+   .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .modal-close {
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px; /* size of the circle */
+  height: 50px;
+  border-radius: 50%;
+  color: white;
+  font-size: 22px; /* icon size */
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.social-link:hover {
+  transform: scale(1.1);
+}
+
+/* Background colors for each platform */
+.social-link.facebook { background-color: #3b5998; }
+.social-link.twitter { background-color: #1da1f2; }
+.social-link.instagram { background-color: #e4405f; }
+.social-link.linkedin { background-color: #0077b5; }
+.social-link.whatsapp { background-color: #25d366; border: none; cursor: pointer; }
+
+    /* Course Highlights - Glass */
+    .course-points {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      color: #fff;
+    }
+
+    .course-points h2 {
+      text-align: left;
+      color: #00cec9;
+      margin-bottom: 1rem;
+    }
+
+    .course-points ul {
+      list-style: none;
+      padding-left: 0;
+      line-height: 1.8;
+    }
+
+    .course-points ul li::before {
+      content: "✔ ";
+      color: #2ecc71;
+    }
+
+    /* 📱 Tablet & Mobile Responsive */
+@media (max-width: 992px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+    padding: 12px 20px;
+  }
+
+  header a {
+    margin: 8px 10px;
+    display: inline-block;
+    font-size: 15px;
+  }
+
+  .course-card {
+    width: 100%;   /* take more space on smaller screens */
+    margin: 1.5rem auto;
+    
+  }
+
+  .course-points {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .social-links {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header a {
+    display: block;   /* stack vertically */
+    margin: 6px 0;
+    font-size: 14px;
+  }
+
+  .course-card {
+    width: 90%;
+  }
+
+  .course-title {
+    font-size: 1.1rem;
+  }
+
+  .course-meta {
+    flex-direction: column;   
+    gap: 6px;
+    align-items: flex-start;  
+    text-align: left;         
+  }
+
+  .course-points h2 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .course-points ul {
+    font-size: 0.9rem;
+  }
+
+  .social-link {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  header {
+    padding: 10px;
+  }
+
+  header a {
+    font-size: 13px;
+  }
+
+  .course-card {
+    margin: 1rem auto;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 1rem;
+  }
+}
+</style>
+</head>
+<body>
+
+    <!-- Header -->
+  <header>
+    <div><strong>Hamsini Tech Solutions</strong></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="newBatches.html">New Batches</a>
+      <a href="hire.html">Hire From Us</a>
+    </div>
+  </header>
+    <!-- Python Full Stack -->
+                <div class="course-card">
+                    
+                    <div class="course-badge">Advanced</div>
+                    <div class="course-image-container">
+                        <img src="python full.webp" alt="Data Science" class="course-image">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Python Full Stack</h3>
+                        <div class="course-instructor">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Mr. Ravi</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <div class="course-date">
+                                <i class="far fa-calendar-alt"></i> 15 Jul 2025
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-outline btn-sm" onclick="openShareModal()">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" onclick="openEnrollModal('Data Science')">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+    <div class="course-points">
+  <h2>Python Full Stack Course Highlights</h2>
+  <ul>
+    <li>Master Python programming fundamentals and OOP concepts</li>
+    <li>Backend development with Django & Flask frameworks</li>
+    <li>Frontend development using HTML, CSS, JavaScript, and React</li>
+    <li>Work with REST APIs and integrate third-party services</li>
+    <li>Database management with MySQL, PostgreSQL, and MongoDB</li>
+    <li>Version control and collaboration with Git & GitHub</li>
+    <li>Deploy applications on AWS, Heroku, or Docker</li>
+    <li>Hands-on projects, resume preparation & interview guidance</li>
+  </ul>
+</div>
+
+<!-- Enroll Modal -->
+     <div id="enrollModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Enroll Now</h3>
+                <span class="modal-close" onclick="closeEnrollModal()">×</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Course</label>
+                    <input type="text" id="courseName" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" id="enrollName" class="form-control" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mobile Number</label>
+                    <input type="number" id="enrollMobile" class="form-control" placeholder="Enter your mobile number">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="enrollEmail" class="form-control" placeholder="Enter your email address">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preferred Batch</label>
+                    <select id="enrollBatch" class="form-control">
+                        <option>Morning (9AM - 12PM)</option>
+                        <option>Afternoon (2PM - 5PM)</option>
+                        <option>Evening (6PM - 9PM)</option>
+                        <option>Weekend (Sat & Sun)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeEnrollModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="submitEnrollForm()">Submit Application</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="shareModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Share This Course</h3>
+                <span class="modal-close" onclick="closeShareModal()">×</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Share Link</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" id="shareUrl" class="form-control" value="https://hamsini.com/courses" readonly>
+                        <button class="btn btn-primary" onclick="copyLink()">Copy</button>
+                    </div>
+                </div>
+                <div style="margin-top: 1.5rem;">
+                     <p style="text-align: center; margin-bottom: 1rem; color: var(--gray-700);">Or share via</p>
+                          <div style="display: flex; justify-content: center; gap: 1rem;">
+                              <div class="social-links">
+                                  <a href="https://www.facebook.com/share/1DnsTNzDye/" class="social-link facebook" target="_blank">
+                                       <i class="fab fa-facebook-f"></i>
+                                   </a>
+                                   <a href="https://twitter.com/" class="social-link twitter" target="_blank">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/hamsinitechsolutions?igsh=NHc5dW00ZjBnYnpm" class="social-link instagram" target="_blank">
+                                         <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/hamsini-tech-solutions-963bbb378/" class="social-link linkedin" target="_blank">
+                                         <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                    <button class="social-link whatsapp" onclick="openShare('whatsapp')">
+                                         <i class="fab fa-whatsapp"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script>
+        // WhatsApp Functions
+        function openWhatsApp() {
+            const phoneNumber = "+91 9515345553";
+            const message = "Hello Hamsini Tech, I'm interested in your courses. Can you please provide more information?";
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Modal Functions
+        function openEnrollModal(courseTitle) {
+            document.getElementById('courseName').value = courseTitle;
+            document.getElementById('enrollModal').style.display = 'flex';
+        }
+
+        function closeEnrollModal() {
+            document.getElementById('enrollModal').style.display = 'none';
+        }
+
+        function openShareModal() {
+            document.getElementById('shareModal').style.display = 'flex';
+        }
+
+        function closeShareModal() {
+            document.getElementById('shareModal').style.display = 'none';
+        }
+
+    function submitEnrollForm() {
+    const course = document.getElementById('courseName').value;  
+    const name = document.getElementById('enrollName').value.trim();
+    const mobile = document.getElementById('enrollMobile').value.trim();
+    const email = document.getElementById('enrollEmail').value.trim();
+    const batch = document.getElementById('enrollBatch').value;
+
+    if (!name || !mobile || !email) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+
+    // ✅ Send data to Spring Boot backend (same server)
+    const data = {
+        course: course,
+        fullName: name,
+        mobile: mobile,
+        email: email,
+        batch : batch
+        
+    };
+
+    fetch("https://www.hamsinitechsolutions.com/api/enroll", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(response => {
+        console.log("Server Response:", response);
+    })
+    .catch(error => {
+        console.error("Error sending to backend:", error);
+    });
+
+    // ✅ Your existing WhatsApp message logic
+    const whatsappMessage = `New Enrollment Request:\n\nName: ${name}\nMobile: ${mobile}\nEmail: ${email}\nCourse: ${course}`;
+    const whatsappUrl = `https://wa.me/919515345553?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappUrl, '_blank');
+
+    alert(`Thank you for your interest!\n\nWe've received your application for ${course}. Our counselor will contact you shortly at ${mobile}.`);
+    closeEnrollModal();
+
+    // Reset form
+    document.getElementById('enrollName').value = '';
+    document.getElementById('enrollMobile').value = '';
+    document.getElementById('enrollEmail').value = '';
+  }
+
+        function copyLink() {
+            const linkInput = document.getElementById('shareUrl');
+            linkInput.select();
+            linkInput.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+
+            // Show copied notification
+            const originalText = linkInput.nextElementSibling.textContent;
+            linkInput.nextElementSibling.innerHTML = '<i class="fas fa-check"></i> Copied!';
+
+            setTimeout(() => {
+                linkInput.nextElementSibling.textContent = originalText;
+            }, 2000);
+        }
+
+        function openShare(platform) {
+            const url = encodeURIComponent(document.getElementById('shareUrl').value);
+            let shareUrl = '';
+            let windowSize = 'width=600,height=400';
+
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/profile.php?id=61578204434186/`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=Check out this course from Hamsini Tech Solutions`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'whatsapp':
+                    const whatsappMessage = `Check out this course from Hamsini Tech Solutions: ${url}`;
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+                    windowSize = '';
+                    break;
+                case 'instagram':
+                    // Instagram doesn't have direct sharing, so we'll open their profile
+                    shareUrl = 'https://www.instagram.com/hamsinitech2025/';
+                    windowSize = '';
+                    break;
+            }
+
+            window.open(shareUrl, '_blank', windowSize);
+        }
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('enrollModal')) {
+                closeEnrollModal();
+            }
+            if (event.target === document.getElementById('shareModal')) {
+                closeShareModal();
+            }
+        });
+
+        // Search functionality
+        document.querySelector('.search-box input')?.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const courseCards = document.querySelectorAll('.course-card');
+
+            courseCards.forEach(card => {
+                const title = card.querySelector('.course-title').textContent.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    </body>
+</html>

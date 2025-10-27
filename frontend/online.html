@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Online Training</title>
+  <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .glass-container {
+      min-height: 100vh;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      max-width: 1300px;
+      margin: auto;
+    }
+
+   header {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px 30px;
+      border-radius: 12px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    header a:hover {
+      color: #00cfff;
+    }
+
+    
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      background: linear-gradient(to right, #1e90ff, #00c9a7);
+      
+      -webkit-text-fill-color: transparent;
+    }
+
+    .top-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: flex-start;
+      margin-bottom: 10px; /* reduced space */
+    }
+
+    .top-flex img {
+      flex: 1;
+      max-width: 50%;
+      border-radius: 10px;
+      width: 80%;
+    }
+
+    .top-content {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .top-content h3 {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .top-content p,
+    .full-width p,
+    .top-content li,
+    .full-width li {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .full-width {
+      margin-top: 0; /* removed extra gap */
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #0156ff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      margin-top: 25px;
+    }
+
+    .btn:hover {
+      background-color: #003bb3;
+    }
+
+    
+    /* Glassmorphism Styles - Fixed Height */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 80%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    overflow: auto; /* Enable scrolling if needed */
+  }
+  
+  .modal-content {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin: 5% auto;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    color: white;
+    min-height: fit-content; /* Adjust height to content */
+  }
+  
+  .modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .select-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .select-group select {
+    flex: 1;
+  }
+  
+  .modal-content input,
+  .modal-content select,
+  .modal-content textarea {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: rgb(47, 177, 210);
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+  
+  .modal-content textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .modal-content input::placeholder,
+  .modal-content textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .modal-content button {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 10px;
+  }
+  
+  .modal-content button:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+  }
+  
+  .close:hover {
+    color: #d31d1d;
+  }
+
+ .enquiry-button {
+  background: linear-gradient(to right, #f43b47, #453a94); /* pink to purple */
+  color: #fff;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.enquiry-button:hover {
+  background: linear-gradient(to right, #453a94, #f43b47); /* reverse gradient */
+}
+/* Base responsive adjustments */
+@media (max-width: 768px) {
+  .glass-container {
+    padding: 15px;
+    margin: 0 10px;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 15px;
+  }
+
+  header a {
+    margin-left: 0;
+    margin-right: 15px;
+    font-size: 13px;
+  }
+
+  .top-flex {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .top-flex img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
+
+  h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .top-content h3 {
+    font-size: 15px;
+  }
+
+  .top-content p,
+  .top-content li,
+  .full-width p,
+  .full-width li {
+    font-size: 14px;
+  }
+
+  .btn,
+  .enquiry-button {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  /* Modal fix for small screens */
+  .modal {
+    height: 100%; /* take full screen */
+    padding: 20px 10px;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 10% auto;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  .top-content h3 {
+    font-size: 14px;
+  }
+
+  .modal-content {
+    margin: 15% auto;
+  }
+}
+
+  </style>
+</head>
+<body>
+   <div class="glass-container">
+   <!-- Header -->
+  <header>
+    <div><strong>Hamsini Tech Solutions</strong></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="newBatches.html">New Batches</a>
+      <a href="hire.html">Hire From Us</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Online Training</h1>
+
+     <!--FLEX SECTION -->
+    <div class="top-flex">
+      <img src="online.png" alt="Classroom Training" />
+      <div class="top-content">
+        <h3><b>Explore Online Learning: It's just one click away.</b></h3>
+        <p>
+          Create a straightforward online training plan that matches the needs of the IT industry. This uncomplicated yet thorough online course curriculum includes important tech skills, making sure learners have what they need to succeed. Learn IT courses at your own speed with easy access to course materials. Practice what you learn in real-life situations through hands-on projects, Labs, and coding exercises, strengthening your understanding of the skills.
+        </p>
+
+        <p><b>Personalized Learning:</b></p>
+        <li>Tailor your learning experience to align with your preferred style, engaging with content at your own speed. Focus more on challenging topics and progress swiftly through familiar ones.
+      </li>
+      <p><li><b>Affordable and Accessible Education: </b></li></p>
+      </div>
+    </div>
+
+    <!-- REMAINING CONTENT FULL WIDTH -->
+    <div class="full-width">
+      <p><li>Access reasonably priced online courses and resources, bringing quality education to a broader learner's perspective and making it more reachable for everyone.</li></p>
+
+      <p><b>Course Resources:</b></p>
+      <li>Explore a wealth of multimedia resources, including videos and interactive simulations, to enhance your learning experience with diverse content.</li>
+
+      <p><b>Tech Skills Development:</b></p>
+      <li>Develop valuable tech skills through our online training programmes, staying relevant in today's rapidly evolving technological landscape.</li>
+
+      <p><b>Real-World Projects:</b></p>
+      <li>Offer real-world projects that simulate industry scenarios, providing learners with the opportunity to apply their skills in practical situations.</li>
+
+      <!-- Enquiry Button -->
+      <button class="enquiry-button" onclick="openEnquiryModal()">Enquiry</button>
+    </div>
+  </div>
+      <!-- Enquiry Modal with Glassmorphism Effect -->
+<div id="enquiryModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeEnquiryModal()">&times;</span>
+    <h2>Enquiry</h2>
+    <form>
+      <input type="text" placeholder="Full Name" required />
+      <input type="text" placeholder="Mobile Number" required />
+      <input type="email" placeholder="Email address" required />
+      
+      <div style="display: flex; gap: 10px;">
+        <select required>
+          <option>Select Course</option>
+          <option>Full Stack Java</option>
+          <option>Aws and Devops</option>
+          <option>Azure Devops</option>
+          <option>Python Full Stack</option>
+          <option>Python</option>
+          <option>Data Science</option>
+          <option>Data Analytics</option>
+          <option>Tableau</option>
+          <option>Power Bi</option>
+          <option>Linux</option>
+        </select>
+
+        <select required>
+          <option>Mode of Training</option>
+          <option>Online</option>
+          <option>Classroom</option>
+        </select>
+      </div>
+
+      <textarea placeholder="Describe message here"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+</div>
+  <script>
+    function openEnquiryModal() {
+     document.getElementById("enquiryModal").style.display = "flex";
+     }
+    function closeEnquiryModal() {
+     document.getElementById("enquiryModal").style.display = "none";
+    }
+  </script>
+     
+</body>
+</html>

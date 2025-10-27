@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      align-items: center;
+      background: url("https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1600&q=80")
+                  no-repeat center center/cover;
+      backdrop-filter: blur(6px);
+      flex-direction: column;
+
+    }
+
+    header {
+      background: rgba(0, 11, 36, 0.5);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    header a:hover {
+      color: #00b7ff;
+    }
+
+    table {
+      width: 90%;
+      margin: 30px auto;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      border-radius: 15px;
+      overflow: hidden;
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+
+    table th, table td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    table th {
+      background: rgba(255, 255, 255, 0.25);
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    table tr:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ====== Logout Link ====== */
+    a {
+      display: inline-block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 10px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
+    }
+
+    a:hover {
+      background: rgba(255,255,255,0.45);
+      transform: scale(1.05);
+    }
+
+    /* ====== Animation ====== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div><strong>Hamsini Tech Solutions</strong></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="newBatches.html">New Batches</a>
+      <a href="hire.html">Hire From Us</a>
+    </div>
+  </header>
+
+  <div class="table">
+    <h2>Enrollment Records</h2>
+
+    <table border="1" id="enrollTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Course</th>
+          <th>Full Name</th>
+          <th>Mobile</th>
+          <th>Email</th>
+          <th>Batch</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data will be populated by JavaScript -->
+      </tbody>
+    </table>
+
+    <br>
+    <a href="adminlogin.html" onclick="logout()">⬅ Logout</a>
+
+    <div style="margin-top: 20px; text-align: right;">
+      <a href="#" onclick="downloadExcel()" class="btn-download" id="downloadLink">
+       ⬇ Download 
+      </a>
+    </div>
+  </div>
+
+  <script>
+    let enrollments = []; // store enrollments for Excel download
+
+    // ✅ Check if admin is logged in
+    if (localStorage.getItem("isAdmin") !== "true") {
+      window.location.href = "adminlogin.html"; // not logged in → redirect
+    }
+
+    // ✅ Load enroll details
+    async function loadEnrollments() {
+      const res = await fetch("https://www.hamsinitechsolutions.com/api/admin/enrolls");
+      enrollments = await res.json();
+
+      const tbody = document.querySelector("#enrollTable tbody");
+tbody.innerHTML = ""; // clear old rows
+
+enrollments.forEach(e => {
+  tbody.innerHTML += `
+    <tr>
+      <td>${e.id}</td>
+      <td>${e.course}</td>
+      <td>${e.fullName}</td>
+      <td>${e.mobile}</td>
+      <td>${e.email}</td>
+      <td>${e.batch}</td>
+    </tr>
+  `;
+});
+
+
+    }
+
+    function logout() {
+      localStorage.removeItem("isAdmin");
+      window.location.href = "adminlogin.html";
+    }
+
+    // ✅ Download enrollments as Excel
+    function downloadExcel() {
+      if (enrollments.length === 0) {
+        alert("No enrollments to download!");
+        return;
+      }
+
+      // Convert JSON → Worksheet
+      const ws = XLSX.utils.json_to_sheet(enrollments);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Enrollments");
+
+      // Export Excel file
+      XLSX.writeFile(wb, "enrollments.xlsx");
+    }
+
+    // Load data on page load
+    loadEnrollments();
+
+  </script>
+</body>
+</html>

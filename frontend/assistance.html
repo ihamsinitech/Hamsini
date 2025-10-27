@@ -1,0 +1,1176 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Job Placement Assistance Program</title>
+   <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .glass-container {
+      min-height: 100vh;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      max-width: 1300px;
+      margin: auto;
+    }
+
+   header {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px 30px;
+      border-radius: 12px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    header a:hover {
+      color: #00cfff;
+    }
+
+    .header-image img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    h2 {
+      color: #fff;
+      margin: 30px 0 10px 0;
+      font-size: 28px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 30px;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    .tab {
+      font-weight: bold;
+      padding: 12px 0;
+      cursor: pointer;
+      position: relative;
+      color: #fff;
+    }
+
+    .tab.active {
+      color: #00aaff;
+    }
+
+    .tab.active::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background: #00aaff;
+      bottom: -2px;
+      left: 0;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 20px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    
+    .course-grid {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .course-card {
+  width: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+}
+
+.course-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Badge */
+.course-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff4081;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 12px;
+  z-index: 1;
+}
+
+/* Image */
+.course-image-container {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+}
+.course-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Content */
+.course-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.course-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+.course-instructor {
+  font-size: 14px;
+  color: #ddd;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.course-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #ccc;
+}
+.course-rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #ffc107;
+}
+.course-date {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Actions */
+.course-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+
+    .btn {
+      border: none;
+      padding: 0.5rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s ease;
+    }
+
+    .btn-sm {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.75rem;
+    }
+
+    .btn-primary {
+      background: rgba(9, 84, 214, 0.25);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: rgba(35, 201, 231, 0.4);
+    }
+
+    .btn-outline {
+      border: 1px solid #ccc;
+      background: rgba(9, 84, 214, 0.25);
+      color: #fff;
+    }
+
+    .btn-outline:hover {
+      background: rgba(35, 201, 231, 0.4);
+      color: #000;
+    }
+    .btn-icon {
+      padding: 0.5rem;
+      border-radius: 50%;
+      font-size: 1rem;
+    }
+
+    .explore-btn {
+      display: block;
+      margin: 20px auto 30px;
+      padding: 12px 24px;
+      background: linear-gradient(to right, #6a1b9a, #1976d2);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      width: fit-content;
+      text-decoration: none;
+    }
+
+    .explore-btn:hover {
+      opacity: 0.9;
+    }
+
+    .extra-courses {
+      display: none;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Glass Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 2rem;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      color: #fff;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .modal-close {
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+
+    .share-box h2 {
+  margin-bottom: 10px;
+}
+
+.share-box p {
+  font-size: 14px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.share-link {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.share-link input {
+  flex: 1;
+  min-width: 200px; /* Ensures input doesn’t collapse */
+  padding: 8px 12px;
+  border: 1px solid rgba(255,255,255,0.4); /* Light border for visibility */
+  border-radius: 10px;
+  outline: none;
+  background: rgba(255,255,255,0.25); /* Slightly more opaque for contrast */
+  color: #fff; /* White text */
+  font-size: 14px;
+}
+
+.copy-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.3);
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.copy-btn:hover {
+  background: rgba(255,255,255,0.5);
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px; /* size of the circle */
+  height: 50px;
+  border-radius: 50%;
+  color: white;
+  font-size: 22px; /* icon size */
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.social-link:hover {
+  transform: scale(1.1);
+}
+
+/* Background colors for each platform */
+.social-link.facebook { background-color: #3b5998; }
+.social-link.twitter { background-color: #1da1f2; }
+.social-link.instagram { background-color: #e4405f; }
+.social-link.linkedin { background-color: #0077b5; }
+.social-link.whatsapp { background-color: #25d366; border: none; cursor: pointer; }
+
+
+.features-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .feature-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  width: 300px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: 0.3s;
+}
+
+    .feature-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+      color: #fff;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      color: white;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    }
+    /* Global Glass Background */
+#timetable {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin: 40px auto;
+  max-width: 95%;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading Style */
+#timetable h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: rgb(213, 25, 141);
+  text-shadow: 0 0 10px #0000004d;
+}
+
+/* Table Styling */
+#timetable table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+#timetable thead {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#timetable th, #timetable td {
+  padding: 15px;
+  text-align: center;
+  color: black;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#timetable th {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#timetable tbody tr:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transition: 0.3s;
+}
+
+/* Meeting Link Styling */
+.meeting-link {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.meeting-link:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+  color: #000;
+  transform: scale(1.05);
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+  #timetable table, #timetable thead, #timetable tbody, #timetable th, #timetable td, #timetable tr {
+    display: block;
+  }
+
+  #timetable thead {
+    display: none;
+  }
+
+  #timetable td {
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+    margin-bottom: 12px;
+  }
+
+  #timetable td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    font-weight: bold;
+    color: #fff;
+  }
+}
+
+/* ✅ Mobile responsiveness */
+@media (max-width: 768px) {
+  .glass-container {
+    padding: 15px;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 15px;
+  }
+
+  header a {
+    margin: 8px 0;
+    font-size: 16px;
+    display: block;
+  }
+
+  .header-image img {
+    height: 180px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    text-align: center;
+  }
+
+  header a {
+    margin: 5px;
+    font-size: 14px;
+  }
+
+  .header-image img {
+    height: 150px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+}
+    </style>
+</head>
+<body>
+   <div class="glass-container">
+   <!-- Header -->
+  <header>
+    <div><strong>Hamsini Tech Solutions</strong></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="newBatches.html">New Batches</a>
+      <a href="hire.html">Hire From Us</a>
+    </div>
+  </header>
+
+  <div class="header-image">
+    <img src="assist.png" alt="Banner Image"/>
+  </div>
+
+  <h2>Job Placement Assistance Program</h2>
+
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('courses')">Courses</div>
+    <div class="tab" onclick="showTab('features')">Training Features</div>
+    <div class="tab" onclick="showTab('timetable')">Batch Time Table</div>
+  </div>
+
+  <!-- Courses Tab -->
+  <div id="courses" class="tab-content active">
+    <div class="course-grid">
+      <!-- Java Full Stack -->
+                <div class="course-card" onclick="openCoursePage(event, 'java.html')">
+                    
+                    <div class="course-badge">New</div>
+                    <div class="course-image-container">
+                        <img src="javaFull.jpg" alt="Java Full Stack" class="course-image">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Java Full Stack</h3>
+                        <div class="course-instructor">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Mr.Uday</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <div class="course-date">
+                                <i class="far fa-calendar-alt"></i> 12 Jul 2025
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-outline btn-sm" onclick="openShareModal()">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" onclick="openEnrollModal('Java Full Stack')">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+      <!-- AWS & DevOps -->
+                <div class="course-card" onclick="openCoursePage(event, 'awsDevops.html')">
+                    <div class="course-badge">Popular</div>
+                    <div class="course-image-container">
+                        <img src="awsDevops.jpg" alt="AWS & DevOps" class="course-image">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">AWS & DevOps</h3>
+                        <div class="course-instructor">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Mr. Manikanta</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <div class="course-date">
+                                <i class="far fa-calendar-alt"></i> 10 Jul 2025
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-outline btn-sm" onclick="openShareModal()">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" onclick="openEnrollModal('AWS & DevOps')">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+      <div class="extra-courses">
+        <!-- Data Science -->
+                <div class="course-card" onclick="openCoursePage(event, 'dataScience.html')">
+                    
+                    <div class="course-badge">Advanced</div>
+                    <div class="course-image-container">
+                        <img src="DS.jpg" alt="Data Science" class="course-image">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Data Science</h3>
+                        <div class="course-instructor">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Mr. Rahul</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <div class="course-date">
+                                <i class="far fa-calendar-alt"></i> 15 Jul 2025
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-outline btn-sm" onclick="openShareModal()">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" onclick="openEnrollModal('Data Science')">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+           <!-- Python Full Stack -->
+                <div class="course-card" onclick="openCoursePage(event, 'python.html')">
+                    
+                    <div class="course-badge">Advanced</div>
+                    <div class="course-image-container">
+                        <img src="python full.webp" alt="Data Science" class="course-image">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Python Full Stack</h3>
+                        <div class="course-instructor">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Mr. Ravi</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <div class="course-date">
+                                <i class="far fa-calendar-alt"></i> 15 Jul 2025
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-outline btn-sm" onclick="openShareModal()">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" onclick="openEnrollModal('Data Science')">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+      </div>
+    </div>
+    <a href="javascript:void(0);" class="explore-btn" onclick="showAllCourses()">EXPLORE OUR COURSES</a>
+  </div>
+
+  <!-- Enroll Modal -->
+    <div id="enrollModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Enroll Now</h3>
+                <span class="modal-close" onclick="closeEnrollModal()">×</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Course</label>
+                    <input type="text" id="courseName" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" id="enrollName" class="form-control" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mobile Number</label>
+                    <input type="number" id="enrollMobile" class="form-control" placeholder="Enter your mobile number">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="enrollEmail" class="form-control" placeholder="Enter your email address">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preferred Batch</label>
+                    <select id="enrollBatch" class="form-control">
+                        <option>Morning (9AM - 12PM)</option>
+                        <option>Afternoon (2PM - 5PM)</option>
+                        <option>Evening (6PM - 9PM)</option>
+                        <option>Weekend (Sat & Sun)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeEnrollModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="submitEnrollForm()">Submit Application</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="shareModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Share This Course</h3>
+                <span class="modal-close" onclick="closeShareModal()">×</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Share Link</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" id="shareUrl" class="form-control" value="https://hamsini.com/courses" readonly>
+                        <button class="btn btn-primary" onclick="copyLink()">Copy</button>
+                    </div>
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <p style="text-align: center; margin-bottom: 1rem; color: var(--gray-700);">Or share via</p>
+                    <div style="display: flex; justify-content: center; gap: 1rem;">
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/share/1DnsTNzDye/" class="social-link facebook" target="_blank">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://twitter.com/" class="social-link twitter" target="_blank">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.instagram.com/hamsinitechsolutions?igsh=NHc5dW00ZjBnYnpm" class="social-link instagram" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/hamsini-tech-solutions-963bbb378/" class="social-link linkedin" target="_blank">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <button class="social-link whatsapp" onclick="openShare('whatsapp')">
+                                <i class="fab fa-whatsapp"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!-- Features Tab -->
+  <div id="features" class="tab-content">
+    <h2>Training Features</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <img src="training.jpeg" alt="Training Image">
+        <h3>Comprehensive Software Training</h3>
+        <p>Dive into a well-structured curriculum covering essential topics relevant to the certification, ensuring a thorough understanding of the subject ma...</p>
+      </div>
+      <div class="feature-card">
+        <img src="trainer.jpeg" alt="Expert Trainers">
+        <h3>Expert Instructors</h3>
+        <p>Learn from industry experts and certified professionals who bring real-world insights, practical experience, and strategies to the training...</p>
+      </div>
+      <div class="feature-card">
+        <img src="projects.jpeg" alt="Hands-on Projects">
+        <h3>Practical Hands-On Projects</h3>
+        <p>Reinforce theoretical knowledge with hands-on labs and projects, providing practical experience crucial for both certification exams and real-world...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Time Table Tab -->
+  <div id="timetable" class="tab-content">
+    <h2>New Batch Timetable</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Course Name</th>
+          <th>Faculty</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Mode of Training</th>
+          <th>Batch Type</th>
+          <th>Meeting Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Course Name">Full Stack Java Placement</td>
+          <td data-label="Faculty">Real-Time Expert</td>
+          <td data-label="Date">Aug 22</td>
+          <td data-label="Time">11:00 AM</td>
+          <td data-label="Mode of Training">Classroom</td>
+          <td data-label="Batch Type">weekday</td>
+          <td data-label="Meeting Link"><a class="meeting-link" onclick="openForm()">Click here</a></td>
+        </tr>
+        <tr>
+          <td>AWS + DevOps</td>
+          <td>Real-Time Expert</td>
+          <td>Aug 14</td>
+          <td>12:00PM</td>
+          <td>Offline</td>
+          <td>Weekday</td>
+          <td><a class="meeting-link" onclick="openForm()">Click here</a></td>
+        </tr>
+
+        <tr>
+          <td>Azure + DevOps</td>
+          <td>Real-Time Expert</td>
+          <td>Aug 20</td>
+          <td>11:00 AM</td>
+          <td>Online</td>
+          <td>Weekend</td>
+          <td><a class="meeting-link" onclick="openForm()">Click here</a></td>
+        </tr>
+        <tr>
+          <td>Data Analytics</td>
+          <td>Real-Time Expert</td>
+          <td>Aug 22</td>
+          <td>12:00 PM</td>
+          <td>Offline</td>
+          <td>Weekday</td>
+          <td><a class="meeting-link" onclick="openForm()">Click here</a></td>
+        </tr>
+        <tr>
+          <td>Data Science</td>
+          <td>Real-Time Expert</td>
+          <td>Aug 25</td>
+          <td>9:00 AM</td>
+          <td>Online</td>
+          <td>Weekday</td>
+          <td><a class="meeting-link" onclick="openForm()">Click here</a></td>
+        </tr>
+        <tr>
+          <td>Power BI</td>
+          <td>Real-Time Expert</td>
+          <td>Aud 24</td>
+          <td>9:30 AM</td>
+          <td>Online</td>
+          <td>Weekend</td>
+          <td><a class="meeting-link" onclick="openForm()">Click here</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+  <!-- Modal -->
+<div id="formModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">Register for the Batch</h3>
+      <span class="modal-close" onclick="closeForm()">&times;</span>
+    </div>
+    <form>
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-control" placeholder="Full Name" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-control" placeholder="Email Address" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mobile Number</label>
+        <input type="number" class="form-control" placeholder="Mobile Number" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+  <script>
+// WhatsApp Functions
+        function openWhatsApp() {
+            const phoneNumber = "+91 9515345553";
+            const message = "Hello Hamsini Tech, I'm interested in your courses. Can you please provide more information?";
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+        function openCoursePage(event, url) {
+             if (!event.target.closest("button")) {
+             window.location.href = url;
+            }
+        }
+
+        // Modal Functions
+        function openEnrollModal(courseTitle) {
+            document.getElementById('courseName').value = courseTitle;
+            document.getElementById('enrollModal').style.display = 'flex';
+        }
+
+        function closeEnrollModal() {
+            document.getElementById('enrollModal').style.display = 'none';
+        }
+
+        function openShareModal() {
+            document.getElementById('shareModal').style.display = 'flex';
+        }
+
+        function closeShareModal() {
+            document.getElementById('shareModal').style.display = 'none';
+        }
+
+    function submitEnrollForm() {
+    const course = document.getElementById('courseName').value;  
+    const name = document.getElementById('enrollName').value.trim();
+    const mobile = document.getElementById('enrollMobile').value.trim();
+    const email = document.getElementById('enrollEmail').value.trim();
+    const batch = document.getElementById('enrollBatch').value;
+
+    if (!name || !mobile || !email) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+
+    // ✅ Send data to Spring Boot backend (same server)
+    const data = {
+        course: course,
+        fullName: name,
+        mobile: mobile,
+        email: email,
+        batch :  batch
+    
+    };
+
+    fetch("https://www.hamsinitechsolutions.com/api/enroll", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(response => {
+        console.log("Server Response:", response);
+    })
+    .catch(error => {
+        console.error("Error sending to backend:", error);
+    });
+
+    // ✅ Your existing WhatsApp message logic
+    const whatsappMessage = `New Enrollment Request:\n\nName: ${name}\nMobile: ${mobile}\nEmail: ${email}\nCourse: ${course}`;
+    const whatsappUrl = `https://wa.me/919515345553?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappUrl, '_blank');
+
+    alert(`Thank you for your interest!\n\nWe've received your application for ${course}. Our counselor will contact you shortly at ${mobile}.`);
+    closeEnrollModal();
+
+    // Reset form
+    document.getElementById('enrollName').value = '';
+    document.getElementById('enrollMobile').value = '';
+    document.getElementById('enrollEmail').value = '';
+  }
+
+        function copyLink() {
+            const linkInput = document.getElementById('shareUrl');
+            linkInput.select();
+            linkInput.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+
+            // Show copied notification
+            const originalText = linkInput.nextElementSibling.textContent;
+            linkInput.nextElementSibling.innerHTML = '<i class="fas fa-check"></i> Copied!';
+
+            setTimeout(() => {
+                linkInput.nextElementSibling.textContent = originalText;
+            }, 2000);
+        }
+
+        function openShare(platform) {
+            const url = encodeURIComponent(document.getElementById('shareUrl').value);
+            let shareUrl = '';
+            let windowSize = 'width=600,height=400';
+
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/profile.php?id=61578204434186/`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=Check out this course from Hamsini Tech Solutions`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'whatsapp':
+                    const whatsappMessage = `Check out this course from Hamsini Tech Solutions: ${url}`;
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+                    windowSize = '';
+                    break;
+                case 'instagram':
+                    // Instagram doesn't have direct sharing, so we'll open their profile
+                    shareUrl = 'https://www.instagram.com/hamsinitech2025/';
+                    windowSize = '';
+                    break;
+            }
+
+            window.open(shareUrl, '_blank', windowSize);
+        }
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('enrollModal')) {
+                closeEnrollModal();
+            }
+            if (event.target === document.getElementById('shareModal')) {
+                closeShareModal();
+            }
+        });
+
+        // Search functionality
+        document.querySelector('.search-box input')?.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const courseCards = document.querySelectorAll('.course-card');
+
+            courseCards.forEach(card => {
+                const title = card.querySelector('.course-title').textContent.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+
+    function showTab(tabId) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function showAllCourses() {
+      document.querySelector('.extra-courses').style.display = 'flex';
+      document.querySelector('.explore-btn').style.display = 'none';
+    }
+
+    function openForm() {
+      document.getElementById("formModal").style.display = "block";
+    }
+    function openForm() {
+  document.getElementById("formModal").style.display = "flex";
+}
+
+
+    function closeForm() {
+      document.getElementById("formModal").style.display = "none";
+    }
+  
+</script>
+
+</body>
+</html>

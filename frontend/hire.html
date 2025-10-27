@@ -1,0 +1,227 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hire Us</title>
+  <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+  <style>
+/* Background Image */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+  min-height: 100vh;
+  color: #fff;
+}
+
+/* Glassmorphism Header */
+header {
+  background: rgba(0, 11, 36, 0.4);
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+header a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+header a:hover {
+  color: #00b7ff;
+}
+
+/* Glassmorphism Hire Section */
+.hire {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.hire h1 {
+  font-size: 28px;
+  color: #00e5ff;
+  margin-bottom: 20px;
+}
+
+.hire h3 {
+  margin-top: 30px;
+  font-size: 20px;
+  color: #fff;
+}
+
+.hire p {
+  line-height: 1.6;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.hire ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.hire ul li {
+  margin-bottom: 10px;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+/* Drop a Query Button */
+.btn-query {
+  margin-top: 15px;
+  background: linear-gradient(to right, #5f2c82, #49a09d);
+  color: white;
+  text-decoration: none;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.btn-query:hover {
+  background: linear-gradient(to right, #49a09d, #5f2c82);
+  transform: scale(1.03);
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .hire {
+    padding: 20px 15px;
+  }
+  .hire h1 {
+    font-size: 22px;
+  }
+  .btn-query {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+  }
+}
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;   /* ✅ stack logo + links */
+    align-items: center;
+    text-align: center;
+  }
+
+  header div {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;   /* ✅ links in a column */
+    align-items: center;
+    gap: 12px;
+  }
+
+  header a {
+    font-size: 16px; /* bigger for touch */
+    margin-left: 0;
+  }
+
+  .hire {
+    margin: 20px;
+    padding: 20px 15px;
+    max-width: 100%;          /* ✅ prevent shrinking */
+  }
+
+  .hire h1 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .hire p, 
+  .hire ul li {
+    font-size: 14px;
+    text-align: justify;      /* ✅ better readability */
+  }
+
+  .btn-query {
+    width: 100%;              /* ✅ full-width button */
+    text-align: center;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hire {
+    margin: 15px;
+    padding: 15px;
+  }
+
+  .hire h1 {
+    font-size: 20px;
+  }
+
+  header div {
+    gap: 8px; /* tighter spacing */
+  }
+}
+
+
+
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div><strong>Hamsini Tech Solutions</strong></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="newBatches.html">New Batches</a>
+      <a href="hire.html">Hire From Us</a>
+    </div>
+  </header>
+
+  <!-- Hire Section -->
+  <div class="hire">
+    <h1>Hire With Us</h1>
+    <p><strong>Collaborate with Hamsini Tech Solutions: Your Gateway to Exceptional Talent</strong></p>
+    <p>Welcome to our "Hire with Us" page, your direct path to accessing top-tier talent from Hamsini Tech Solutions, where education meets excellence. We connect leading IT companies with our highly skilled and motivated students. Partner with us to discover a seamless hiring experience and access a pool of exceptional candidates.</p>
+    
+    <h3>Why Choose Hamsini Tech Solutions Graduates:</h3>
+    <ul>
+      <li><strong>Cutting-Edge Education:</strong> Our students undergo rigorous training in the latest technologies, ensuring they are well-equipped with the skills demanded by the ever-evolving IT industry.</li>
+      <li><strong>Hands-On Practical Experience:</strong> We place a strong emphasis on practical learning, allowing our graduates to apply their knowledge to real-world scenarios.</li>
+      <li><strong>Industry-Relevant Curriculum:</strong> Our curriculum is meticulously crafted to align with industry demands, ensuring graduates are well-versed in the latest trends and technologies.</li>
+      <li><strong>Expert-Led Training:</strong> Students benefit from expert-led training sessions conducted by seasoned professionals, providing valuable insights and industry best practices.</li>
+      <li><strong>Diverse Skill Sets:</strong> Graduates possess skills ranging from programming and web development to data science and IT infrastructure.</li>
+    </ul>
+
+    <h3>How to Hire with Us:</h3>
+    <ul>
+      <li><strong>Explore our Talent Pool:</strong> Browse profiles of talented graduates matching your company’s needs.</li>
+      <li><strong>Participate in Recruitment Drives:</strong> Join drives to directly interact with potential candidates.</li>
+      <li><strong>Customized Hiring Solutions:</strong> We offer flexible hiring solutions tailored to your company.</li>
+    </ul>
+
+    <h3>Contact Us:</h3>
+    <p>📧 For inquiries and collaboration opportunities, reach out at <strong>hamsinitechsolutions.com</strong></p>
+    <p>Hamsini Tech Solutions – Where Talent Meets Opportunity!</p>
+
+    <button class="btn-query" onclick="location.href='contact.html'">DROP A QUERY !</button>
+  </div>
+</body>
+
+</html>

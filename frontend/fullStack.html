@@ -1,0 +1,1053 @@
+<html>
+    <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Full Stack Courses</title>
+        <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+
+  <style>
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .glass-container {
+      min-height: 100vh;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      max-width: 1300px;
+      margin: auto;
+    }
+
+   header {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px 30px;
+      border-radius: 12px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    header a:hover {
+      color: #00cfff;
+    }
+
+    .header-image img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    h2 {
+      color: #fff;
+      margin: 30px 0 10px 0;
+      font-size: 28px;
+    }
+
+    /* Carousel Wrapper */
+    .carousel-wrapper {
+      position: relative;
+      padding: 40px 40px; /* Added more padding for arrows */
+      overflow: hidden;
+    }
+
+    /* Viewport */
+    .carousel {
+      overflow: hidden;
+      width: 100%;
+    }
+
+    /* Track of Cards */
+    .carousel-track {
+      display: flex;
+      gap: 20px; /* spacing between cards */
+      transition: transform 0.5s ease;
+    }
+
+    /* Course Card Glass Style */
+    .course-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      overflow: hidden;
+      width: 260px; /* Fixed width */
+      flex-shrink: 0; /* Prevent cards from shrinking */
+      transition: transform 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .course-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #ff4757;
+      color: #fff;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      border-radius: 20px;
+      z-index: 1;
+    }
+
+    .course-image-container {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+    }
+
+    .course-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .course-card:hover .course-image {
+      transform: scale(1.05);
+    }
+
+    .course-content {
+      padding: 1.2rem;
+    }
+
+    .course-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+
+    .course-instructor {
+      font-size: 0.9rem;
+      color: #ddd;
+      margin-bottom: 0.75rem;
+    }
+
+    .course-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      color: #ddd;
+    }
+
+    .course-rating {
+      color: #f39c12;
+    }
+
+    .course-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn {
+      border: none;
+      padding: 0.5rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s ease;
+    }
+
+    .btn-sm {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.75rem;
+    }
+
+    .btn-primary {
+      background: rgba(9, 84, 214, 0.7);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: rgba(35, 201, 231, 0.8);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: transparent;
+      color: #fff;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Arrows */
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 30px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      cursor: pointer;
+      z-index: 10;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+
+    .nav-arrow:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    #prevBtn {
+      left: 0;
+    }
+
+    #nextBtn {
+      right: 0;
+    }
+
+    /* Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .modal-content {
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border-radius: 12px;
+          width: 90%;
+          max-width: 500px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal-title {
+        font-weight: 700;
+        font-size: 1.25rem;
+    }
+
+    .modal-close {
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: white;
+        transition: all 0.2s ease;
+    }
+
+    .modal-close:hover {
+        transform: rotate(90deg);
+        color: #ddd;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    .modal-footer {
+        padding: 1rem 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+    }
+
+    /* Form Elements */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: white;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        font-size: 1rem;
+        transition: all 0.2s ease;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      color: white;
+      font-size: 22px;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .social-link:hover {
+      transform: scale(1.1);
+    }
+
+    /* Background colors for each platform */
+    .social-link.facebook { background-color: #3b5998; }
+    .social-link.twitter { background-color: #1da1f2; }
+    .social-link.instagram { background-color: #e4405f; }
+    .social-link.linkedin { background-color: #0077b5; }
+    .social-link.whatsapp { background-color: #25d366; }
+
+
+@media (max-width: 768px) {
+  /* Header stacked and centered */
+  header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+  }
+
+  header a {
+    margin: 8px 5px 0 5px;
+    font-size: 12px;
+  }
+
+
+  /* Make header image full width and auto height */
+  .header-image img {
+    width: 100%;
+    height: auto; /* important */
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  /* Carousel track shows only one card */
+  .carousel-track {
+    justify-content: flex-start;
+    gap: 0; /* remove extra gap for better centering */
+    transform: translateX(0) !important; /* reset any transform */
+  }
+
+  .course-card {
+    width: 100%; /* full width in view */
+    max-width: 300px;
+    flex-shrink: 0;
+    margin: 0 auto;
+  }
+
+  .carousel-wrapper {
+    padding: 0 5px; /* adjust side padding */
+  }
+ .course-title {
+    font-size: 1.1rem;
+  }
+
+  .course-instructor,
+  .course-meta {
+    font-size: 0.8rem;
+  }
+
+  .btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.7rem;
+  }
+
+  .nav-arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    top: 45%; /* slightly higher for better alignment */
+    background: rgba(0,0,0,0.4); /* more visible on mobile */
+    z-index: 20; /* ensure above carousel cards */
+  }
+
+  #prevBtn {
+    left: 5px; /* move inside carousel wrapper */
+  }
+
+  #nextBtn {
+    right: 5px; /* move inside carousel wrapper */
+  }
+
+  /* Modal width */
+  .modal-content {
+    width: 95%;
+  }
+
+  /* Social links smaller */
+  .social-link {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
+/* ===== Extra small phones ===== */
+@media (max-width: 480px) {
+  .course-card {
+    width: 100%;
+  }
+
+  .course-image-container {
+    height: 120px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .btn {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+
+  .header-image img {
+    height: auto;
+    max-height: 150px;
+  }
+
+  .course-card {
+    width: 95%;
+    max-width: none;
+  }
+  
+}
+
+</style>
+
+    </head>
+    <body>
+      <div class="glass-container">
+    <!-- Header -->
+  <header >
+    <div><strong>Hamsini Tech Solutions</strong></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="newBatches.html">New Batches</a>
+      <a href="hire.html">Hire From Us</a>
+    </div>
+  </header>
+        <div class="header-image">
+         <img src="fullstack.png">
+        </div><br/>
+        <div>
+            <h2>&emsp;&emsp;Full Stack Courses</h2>
+        </div>
+        
+<!-- All Courses -->
+   <div class="carousel-wrapper">
+    <button id="prevBtn" class="nav-arrow">❮</button>
+
+    <div class="carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Java Full Stack -->
+  <div class="course-card" onclick="openCoursePage(event, 'java.html')">
+                    
+                    <div class="course-badge">New</div>
+                    <div class="course-image-container">
+                        <img src="javaFull.jpg" alt="Java Full Stack" class="course-image">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Java Full Stack</h3>
+                        <div class="course-instructor">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Mr.Uday</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <div class="course-date">
+                                <i class="far fa-calendar-alt"></i> 12 Jul 2025
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-outline btn-sm" onclick="openShareModal()">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" onclick="openEnrollModal('Java Full Stack')">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+          <!-- React JS -->
+                  <div class="course-card" onclick="openCoursePage(event, 'react.html')">
+                    
+                    <div class="course-image-container">
+                        <img src="react.jpg" alt="React.Js" class="course-image">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">React.Js</h3>
+                        <div class="course-instructor">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Mr. Uday</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <div class="course-date">
+                                <i class="far fa-calendar-alt"></i> 12 Jul 2025
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-outline btn-sm" onclick="openShareModal()">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" onclick="openEnrollModal('React.Js')">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+  <!-- Generative AI -->
+  <div class="course-card" onclick="openCoursePage(event, 'gen.html')">
+                    
+                    <div class="course-badge">Trending</div>
+                    <div class="course-image-container">
+                        <img src="genAI.jpeg" alt="Generative AI" class="course-image">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Generative AI</h3>
+                        <div class="course-instructor">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Mr. Hemanth</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <div class="course-date">
+                                <i class="far fa-calendar-alt"></i> 12 Jul 2025
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-outline btn-sm" onclick="openShareModal()">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" onclick="openEnrollModal('Generative AI')">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+  <!-- AWS & DevOps -->
+  <div class="course-card"  onclick="openCoursePage(event, 'awsDevops.html')">
+                     
+                    <div class="course-badge">Popular</div>
+                    <div class="course-image-container">
+                        <img src="aws.jpg" alt="AWS & DevOps" class="course-image">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">AWS & DevOps</h3>
+                        <div class="course-instructor">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Mr. Manikanta</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <div class="course-date">
+                                <i class="far fa-calendar-alt"></i> 10 Jul 2025
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-outline btn-sm" onclick="openShareModal()">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" onclick="openEnrollModal('AWS & DevOps')">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+  <!-- Data science -->
+  <div class="course-card" onclick="openCoursePage(event, 'dataScience.html')">
+                    
+                    <div class="course-badge">Advanced</div>
+                    <div class="course-image-container">
+                        <img src="DS.jpg" alt="Data Science" class="course-image">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Data Science</h3>
+                        <div class="course-instructor">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Mr. Rahul</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <div class="course-date">
+                                <i class="far fa-calendar-alt"></i> 15 Jul 2025
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-outline btn-sm" onclick="openShareModal()">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" onclick="openEnrollModal('Data Science')">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+  <!-- Python Full Stack  -->
+                <div class="course-card" onclick="openCoursePage(event, 'python.html')" >
+                    
+                    <div class="course-badge">Advanced</div>
+                    <div class="course-image-container">
+                        <img src="python full.webp" alt="Data Science" class="course-image">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Python Full Stack</h3>
+                        <div class="course-instructor">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Mr. Ravi</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <div class="course-date">
+                                <i class="far fa-calendar-alt"></i> 15 Jul 2025
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-outline btn-sm" onclick="openShareModal()">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" onclick="openEnrollModal('Data Science')">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+</div>
+   <button id="nextBtn" class="nav-arrow">❯</button>
+</div>
+</div>
+
+<!-- Enroll Modal -->
+    <div id="enrollModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Enroll Now</h3>
+                <span class="modal-close" onclick="closeEnrollModal()">×</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Course</label>
+                    <input type="text" id="courseName" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" id="enrollName" class="form-control" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mobile Number</label>
+                    <input type="number" id="enrollMobile" class="form-control" placeholder="Enter your mobile number">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="enrollEmail" class="form-control" placeholder="Enter your email address">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preferred Batch</label>
+                    <select id="enrollBatch" class="form-control">
+                        <option>Morning (9AM - 12PM)</option>
+                        <option>Afternoon (2PM - 5PM)</option>
+                        <option>Evening (6PM - 9PM)</option>
+                        <option>Weekend (Sat & Sun)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeEnrollModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="submitEnrollForm()">Submit Application</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="shareModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Share This Course</h3>
+                <span class="modal-close" onclick="closeShareModal()">×</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Share Link</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" id="shareUrl" class="form-control" value="https://hamsini.com/courses" readonly>
+                        <button class="btn btn-primary" onclick="copyLink()">Copy</button>
+                    </div>
+                </div>
+                <div style="margin-top: 1.5rem;">
+                  <p style="text-align: center; margin-bottom: 1rem; color: var(--gray-700);">Or share via</p>
+                  <div style="display: flex; justify-content: center; gap: 1rem;">
+                    <div class="social-links">
+                      <a href="https://www.facebook.com/share/1DnsTNzDye/" class="social-link facebook" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                      </a>
+                      <a href="https://twitter.com/" class="social-link twitter" target="_blank">
+                         <i class="fab fa-twitter"></i>
+                      </a>
+                      <a href="https://www.instagram.com/hamsinitechsolutions?igsh=NHc5dW00ZjBnYnpm" class="social-link instagram" target="_blank">
+                          <i class="fab fa-instagram"></i>
+                      </a>
+                      <a href="https://www.linkedin.com/in/hamsini-tech-solutions-963bbb378/" class="social-link linkedin" target="_blank">
+                          <i class="fab fa-linkedin-in"></i>
+                      </a>
+                      <button class="social-link whatsapp" onclick="openShare('whatsapp')">
+                          <i class="fab fa-whatsapp"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+<!--All courses-->
+<script>
+const track = document.getElementById("carouselTrack");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+const originalCards = Array.from(track.children);
+const visibleCards = 4;
+
+// Clone last 4 and prepend to start
+originalCards.slice(-visibleCards).forEach(card => {
+  const clone = card.cloneNode(true);
+  track.insertBefore(clone, track.firstChild);
+});
+
+// Clone first 4 and append to end
+originalCards.slice(0, visibleCards).forEach(card => {
+  const clone = card.cloneNode(true);
+  track.appendChild(clone);
+});
+
+// All cards after cloning
+const allCards = track.querySelectorAll(".course-card");
+const cardWidth = allCards[0].offsetWidth + 20;
+
+let currentIndex = visibleCards; // Start at real first slide
+
+function updatePosition() {
+  track.style.transition = "transform 0.4s ease-in-out";
+  track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+}
+
+// Initial shift
+updatePosition();
+
+// Right Arrow Click
+nextBtn.addEventListener("click", () => {
+  if (currentIndex >= allCards.length - visibleCards) return;
+  currentIndex++;
+  updatePosition();
+});
+
+// Left Arrow Click
+prevBtn.addEventListener("click", () => {
+  if (currentIndex <= 0) return;
+  currentIndex--;
+  updatePosition();
+});
+
+// Loop logic
+track.addEventListener("transitionend", () => {
+  // Jump to real first if passed fake last
+  if (currentIndex === allCards.length - visibleCards) {
+    track.style.transition = "none";
+    currentIndex = visibleCards;
+    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+  }
+  // Jump to real last if passed fake first
+  if (currentIndex === 0) {
+    track.style.transition = "none";
+    currentIndex = allCards.length - visibleCards * 2;
+    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+  }
+});
+    
+
+        // WhatsApp Functions
+        function openWhatsApp() {
+            const phoneNumber = "+91 9515345553";
+            const message = "Hello Hamsini Tech, I'm interested in your courses. Can you please provide more information?";
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Modal Functions
+        function openEnrollModal(courseTitle) {
+            document.getElementById('courseName').value = courseTitle;
+            document.getElementById('enrollModal').style.display = 'flex';
+        }
+
+        function closeEnrollModal() {
+            document.getElementById('enrollModal').style.display = 'none';
+        }
+
+        function openShareModal() {
+            document.getElementById('shareModal').style.display = 'flex';
+        }
+
+        function closeShareModal() {
+            document.getElementById('shareModal').style.display = 'none';
+        }
+
+    function submitEnrollForm() {
+    const course = document.getElementById('courseName').value;  
+    const name = document.getElementById('enrollName').value.trim();
+    const mobile = document.getElementById('enrollMobile').value.trim();
+    const email = document.getElementById('enrollEmail').value.trim();
+    const batch = document.getElementById('enrollBatch').value;
+
+    if (!name || !mobile || !email) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+
+    // ✅ Send data to Spring Boot backend (same server)
+    const data = {
+        course: course,
+        fullName: name,
+        mobile: mobile,
+        email: email,
+        batch :batch
+        
+        
+    };
+
+    fetch("https://www.hamsinitechsolutions.com/api/enroll", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(response => {
+        console.log("Server Response:", response);
+    })
+    .catch(error => {
+        console.error("Error sending to backend:", error);
+    });
+
+    // ✅ Your existing WhatsApp message logic
+    const whatsappMessage = `New Enrollment Request:\n\nName: ${name}\nMobile: ${mobile}\nEmail: ${email}\nCourse: ${course}`;
+    const whatsappUrl = `https://wa.me/919515345553?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappUrl, '_blank');
+
+    alert(`Thank you for your interest!\n\nWe've received your application for ${course}. Our counselor will contact you shortly at ${mobile}.`);
+    closeEnrollModal();
+
+    // Reset form
+    document.getElementById('enrollName').value = '';
+    document.getElementById('enrollMobile').value = '';
+    document.getElementById('enrollEmail').value = '';
+  }
+
+        function copyLink() {
+            const linkInput = document.getElementById('shareUrl');
+            linkInput.select();
+            linkInput.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+
+            // Show copied notification
+            const originalText = linkInput.nextElementSibling.textContent;
+            linkInput.nextElementSibling.innerHTML = '<i class="fas fa-check"></i> Copied!';
+
+            setTimeout(() => {
+                linkInput.nextElementSibling.textContent = originalText;
+            }, 2000);
+        }
+
+        function openShare(platform) {
+            const url = encodeURIComponent(document.getElementById('shareUrl').value);
+            let shareUrl = '';
+            let windowSize = 'width=600,height=400';
+
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/profile.php?id=61578204434186/`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=Check out this course from Hamsini Tech Solutions`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'whatsapp':
+                    const whatsappMessage = `Check out this course from Hamsini Tech Solutions: ${url}`;
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+                    windowSize = '';
+                    break;
+                case 'instagram':
+                    // Instagram doesn't have direct sharing, so we'll open their profile
+                    shareUrl = 'https://www.instagram.com/hamsinitech2025/';
+                    windowSize = '';
+                    break;
+            }
+
+            window.open(shareUrl, '_blank', windowSize);
+        }
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('enrollModal')) {
+                closeEnrollModal();
+            }
+            if (event.target === document.getElementById('shareModal')) {
+                closeShareModal();
+            }
+        });
+
+        // Search functionality
+        document.querySelector('.search-box input')?.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const courseCards = document.querySelectorAll('.course-card');
+
+            courseCards.forEach(card => {
+                const title = card.querySelector('.course-title').textContent.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });    
+      </script>
+
+    </body>
+</html>

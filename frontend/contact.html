@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Hamsini Tech Solutions</title>
+  <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      color: white;
+      padding-top: 100px; /* Push content below header */
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: -1;
+    }
+
+    header {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 1100px;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 15px 30px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    header a.logo {
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #fff;
+    }
+
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    header nav a:hover {
+      color: #00e5ff;
+    }
+
+    .form-card {
+      width: 90%;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2.5rem;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      animation: fadeIn 0.6s ease-out forwards;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .form-card h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .form-card h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: #00e5ff;
+      border-radius: 3px;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .form-control:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #00e5ff;
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+    }
+
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: rgba(0, 229, 255, 0.15);
+      color: white;
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background: rgba(0, 229, 255, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 229, 255, 0.3);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .form-card {
+        padding: 1.5rem;
+      }
+      .form-card h2 {
+        font-size: 1.6rem;
+      }
+      header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 20px;
+      }
+    }  
+    </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">Hamsini Tech Solutions</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="newBatches.html">Courses</a>
+      <a href="hire.html">Hire</a>
+    </nav>
+  </header>
+
+  <div class="form-card">
+    <h2>Get In Touch</h2>
+    <form>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Full Name" required>
+      </div>
+      
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="Email Address" required>
+      </div>
+      
+      <div class="form-group">
+        <input type="number" class="form-control" placeholder="Phone Number" required>
+      </div>
+      
+      <div class="form-group">
+        <textarea class="form-control" placeholder="Your Message" required></textarea>
+      </div>
+      
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </div>
+
+</body>
+</html>

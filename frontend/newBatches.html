@@ -1,0 +1,414 @@
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Batches</title>
+  <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+    <style>
+        
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .glass-container {
+      min-height: 100vh;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      max-width: 1300px;
+      margin: auto;
+    }
+
+   header {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px 30px;
+      border-radius: 12px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    header a:hover {
+      color: #00cfff;
+    }
+
+ /* Global Glass Background */
+#timetable {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin: 40px auto;
+  max-width: 95%;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading Style */
+#timetable h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: rgb(213, 25, 141);
+  text-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Table Styling */
+#timetable table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+#timetable thead {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#timetable th, #timetable td {
+  padding: 15px;
+  text-align: center;
+  color: black;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#timetable th {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#timetable tbody tr:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transition: 0.3s;
+}
+
+/* Meeting Link Styling */
+.meeting-link {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.meeting-link:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+  color: #000;
+  transform: scale(1.05);
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+  #timetable table, #timetable thead, #timetable tbody, #timetable th, #timetable td, #timetable tr {
+    display: block;
+  }
+
+  #timetable thead {
+    display: none;
+  }
+
+  #timetable td {
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+    margin-bottom: 12px;
+  }
+
+  #timetable td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    font-weight: bold;
+    color: #fff;
+  }
+}
+.modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 16px;
+      margin: 10% auto;
+      padding: 30px;
+      width: 90%;
+      max-width: 450px;
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .modal-content h3,
+    .modal-content h1 {
+      text-align: center;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .modal-content button {
+      width: 100%;
+      padding: 10px;
+      background: rgba(9, 84, 214, 0.25);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .modal-content button:hover {
+      background: rgba(35, 201, 231, 0.4);
+      color: #000;
+
+    }
+
+    .close {
+      float: right;
+      font-size: 20px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .close:hover {
+      color: red;
+    }
+
+    /* ✅ Mobile Header Fix */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;   /* stack logo + links */
+    align-items: center;
+    text-align: center;
+    padding: 12px;
+  }
+
+  header div {
+    display: flex;
+    flex-direction: column;   /* links vertical */
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  header a {
+    display: block;
+    margin: 6px 0;
+    font-size: 15px;
+  }
+}
+
+/* ✅ Mobile Timetable Fix */
+@media (max-width: 768px) {
+  #timetable {
+    padding: 15px;
+  }
+
+  #timetable td {
+    padding: 12px 12px 12px 50%;
+    color: #fff;             /* text visible on background */
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+
+  #timetable td::before {
+    color: hsl(111, 69%, 54%);          /* highlight label */
+    font-weight: bold;
+  }
+
+  #timetable tbody tr {
+    margin-bottom: 15px;
+    display: block;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.3);
+  }
+}
+
+
+    </style>
+ </head>
+<body>
+    <div class="glass-container">
+   <!-- Header -->
+  <header>
+    <div><strong>Hamsini Tech Solutions</strong></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="newBatches.html">New Batches</a>
+      <a href="hire.html">Hire From Us</a>
+    </div>
+  </header>
+
+<!-- Time Table Tab -->
+  <div id="timetable" class="tab-content">
+    <h2>New Batch Timetable</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Course Name</th>
+          <th>Faculty</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th> Mode of Training</th>
+          <th>Batch Type</th>
+          <th>Meeting Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Course Name">Full Stack Java Placement</td>
+          <td data-label="Faculty">Real-Time Expert</td>
+          <td data-label="Date">Jul 7</td>
+          <td data-label="Time">11:00 AM</td>
+          <td data-label="Training">Classroom</td>
+          <td data-label="Batch Type">weekday</td>
+          <td data-label="Meeting Link"><a class="meeting-link" onclick="openForm()">Click here</a></td>
+        </tr>
+        <tr>
+          <td data-label="Course Name">AWS + DevOps</td>
+          <td data-label="Faculty">Real-Time Expert</td>
+          <td data-label="Date">Jul 9</td>
+          <td data-label="Time">10:00AM</td>
+          <td data-label="Training">Offline</td>
+          <td data-label="Batch Type">Weekday</td>
+          <td data-label="Meeting Link"><a class="meeting-link" onclick="openForm()">Click here</a></td>
+        </tr>
+
+        <tr>
+          <td data-label="Course Name">Azure + DevOps</td>
+          <td data-label="Faculty">Real-Time Expert</td>
+          <td data-label="Date">Jul 8</td>
+          <td data-label="Time">11:00 AM</td>
+          <td data-label="Training">Online</td>
+          <td data-label="Batch Type">Weekend</td>
+          <td data-label="Meeting Link"><a class="meeting-link" onclick="openForm()">Click here</a></td>
+        </tr>
+        <tr>
+          <td data-label="Course Name">Data Analytics</td>
+          <td data-label="Faculty">Real-Time Expert</td>
+          <td data-label="Date">Jul 8</td>
+          <td data-label="Time">12:00 PM</td>
+          <td data-label="Training">Offline</td>
+          <td data-label="Batch Type">Weekday</td>
+          <td data-label="Meeting Link"><a class="meeting-link" onclick="openForm()">Click here</a></td>
+        </tr>
+        <tr>
+          <td data-label="Course Name">Data Science</td>
+          <td data-label="Faculty">Real-Time Expert</td>
+          <td data-label="Date">Jul 10</td>
+          <td data-label="Time">9:00 AM</td>
+          <td data-label="Training">Online</td>
+          <td data-label="Batch Type">Weekday</td>
+          <td data-label="Meeting Link"><a class="meeting-link" onclick="openForm()">Click here</a></td>
+        </tr>
+        <tr>
+          <td data-label="Course Name">Power BI</td>
+          <td data-label="Faculty">Real-Time Expert</td>
+          <td data-label="Date">Jul 9</td>
+          <td data-label="Time">9:30 AM</td>
+          <td data-label="Training">Online</td>
+          <td data-label="Batch Type">Weekend</td>
+          <td data-label="Meeting Link"><a class="meeting-link" onclick="openForm()">Click here</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="formModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeForm()">&times;</span>
+      <h3>Register for the Batch</h3>
+      <form onsubmit="submitEnrollForm(event)">
+       <input type="text" id="enrollName" placeholder="Full Name" required>
+       <input type="email" id="enrollEmail" placeholder="Email Address" required>
+       <input type="tel" id="enrollMobile" placeholder="Mobile Number" required>
+       <button type="submit" class="submit-btn">Register</button>
+    </form>
+    </div>
+  </div>
+</div>    
+<script>
+       function openForm() {
+      document.getElementById("formModal").style.display = "block";
+    }
+
+    function closeForm() {
+      document.getElementById("formModal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("formModal");
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+     function submitEnrollForm() {
+    var name = document.getElementById("enrollName").value.trim();
+    var mobile = document.getElementById("enrollMobile").value.trim();
+    var email = document.getElementById("enrollEmail").value.trim();
+
+    if (name === "" || mobile === "" || email === "") {
+      alert("Please fill in all fields.");
+    } else {
+      alert(" Registration successfully!");
+      closeEnrollModal();
+    }
+  } 
+   </script>
+</body>
+</html>
