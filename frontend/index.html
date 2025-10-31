@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
 
-/* Welcome Animation Styles - REDUCED & OPTIMIZED */
+  /* Welcome Animation Styles - REDUCED & OPTIMIZED */
         #welcome-animation {
             position: fixed;
             top: 0;
@@ -46,7 +46,7 @@
             z-index: 1;
         }
 
-        /* Welcome Content - Initially Hidden */
+        /* Welcome Content - Initially Hidden 
         .welcome-content {
             position: relative;
             z-index: 2;
@@ -75,7 +75,7 @@
           color: rgba(255, 255, 255, 0.8);
           font-size: 0.8rem;
           text-align: center;
-          opacity: 1; /* Change from 0 to 1 */
+          opacity: 1; /* Change from 0 to 1 
           min-height: 20px;
           margin-top: 0.5rem;
         }
@@ -168,7 +168,7 @@
         .skip-btn:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
-        }
+        }*/
 
 
 @keyframes logoPulse {
@@ -1435,20 +1435,11 @@ body.loading {
     <div id="welcome-animation">
         <!-- Video Background -->
         <video class="welcome-video-bg" autoplay muted playsinline loop preload="auto">
-            <source src="12869067_1920_1080_60fps.mp4" type="video/mp4">
+            <source src="animation-video.mp4" type="video/mp4">
           
             Your browser does not support the video tag.
         </video>
         <div class="welcome-overlay"></div>
-        <div class="welcome-content">
-            <div class="animation-logo">
-                <img src="logo-website.png" alt="Hamsini Tech Solutions Logo">
-            </div>
-            <h1 class="welcome-text">Welcome to Hamsini Tech Solutions</h1>
-            <div class="loading-container">
-            </div>
-            <button class="skip-btn" onclick="skipAnimation()">Skip</button>
-        </div>
     </div>
 
     <!-- WhatsApp Button -->
@@ -2247,9 +2238,7 @@ body.loading {
 // Initialize the animation sequence
 function initWelcomeAnimation() {
     const welcomeVideo = document.querySelector('.welcome-video-bg');
-    const welcomeContent = document.querySelector('.welcome-content');
-    const loadingProgress = document.querySelector('.loading-progress');
-    const loadingText = document.querySelector('.loading-text');
+    
     
     // Set initial state - body in loading mode
     document.body.classList.add('loading');
@@ -2261,37 +2250,10 @@ function initWelcomeAnimation() {
         });
     }
 
-    setTimeout(() => {
-        // Step 2: Show welcome content after 1 second
-        if (welcomeContent) {
-            welcomeContent.classList.add('show');
-        }
-        
-        // Step 3: Start loading text animation
-        if (loadingText) {
-            const messages = [
-                "Loading course content...",
-                "Preparing learning materials...",
-                "Setting up your profile...",
-                "Almost ready..."
-            ];
-            
-            let currentMessage = 0;
-            const textInterval = setInterval(() => {
-                if (currentMessage < messages.length) {
-                    loadingText.textContent = messages[currentMessage];
-                    currentMessage++;
-                } else {
-                    clearInterval(textInterval);
-                }
-            }, 600); // Change message every 600ms
-        }
-    }, 2000);
-
     // Auto-complete animation after 3 seconds total
     setTimeout(() => {
         skipAnimation();
-    }, 4000);
+    }, 3500);
 }
 
 // Start the animation when page loads
