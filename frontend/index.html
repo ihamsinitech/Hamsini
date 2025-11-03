@@ -60,13 +60,13 @@
         }
 
         /* Mobile View - Welcome Animation */
-@media (max-width: 768px) {
+    @media (max-width: 768px) {
     #welcome-animation {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100vw;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
         z-index: 9999;
         background: #000;
     }
@@ -75,7 +75,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: center;
+        object-position: center center;
     }
     
     .video-wrapper {
@@ -99,7 +99,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: center;
+        object-position: center center;
     }
 }
         /* Modern Color Scheme */
@@ -1317,7 +1317,7 @@
     <div id="welcome-animation">
         <div class="video-wrapper">
             <video class="welcome-video-bg" autoplay muted playsinline loop preload="auto">
-                <source src="video-animation (1).mp4" type="video/mp4">
+                <source src="video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>

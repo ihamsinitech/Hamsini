@@ -18,7 +18,7 @@ import com.hamsini.backend.repository.EnrollRepository;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "www.hamsinitechsolutions.com") // allow only your frontend
+@CrossOrigin(origins = "https://www.hamsinitechsolutions.com") // allow only your frontend
 public class AdminController {
     @Autowired
     private EnrollRepository enrollRepo;

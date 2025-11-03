@@ -150,7 +150,7 @@
 
     // ✅ Load enroll details
     async function loadEnrollments() {
-      const res = await fetch("http://www.hamsinitechsolutions.com/api/admin/enrolls");
+      const res = await fetch("https://www.hamsinitechsolutions.com/api/admin/enrolls");
       enrollments = await res.json();
 
       const tbody = document.querySelector("#enrollTable tbody");
