@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,31 +10,34 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
-
-  /* Welcome Animation Styles - REDUCED & OPTIMIZED */
+                 /* Welcome Animation - Mobile First Approach */
         #welcome-animation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             z-index: 9999;
+            background: #000;
             overflow: hidden;
         }
 
-        /* Video Background */
-        .welcome-video-bg {
+        .video-wrapper {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .welcome-video-bg {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            z-index: -1;
+            display: block;
         }
 
         .welcome-overlay {
@@ -43,241 +47,59 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
-
-        /* Welcome Content - Initially Hidden 
-        .welcome-content {
-            position: relative;
             z-index: 2;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            max-width: 500px;
-            width: 85%;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.8s ease;
         }
 
-        .welcome-content.show {
-            opacity: 1;
-            visibility: visible;
-            animation: contentFadeIn 0.8s ease forwards;
+        /* Hide main content initially */
+        body.loading > *:not(#welcome-animation) {
+            display: none;
         }
 
-        .loading-text {
-          color: rgba(255, 255, 255, 0.8);
-          font-size: 0.8rem;
-          text-align: center;
-          opacity: 1; /* Change from 0 to 1 
-          min-height: 20px;
-          margin-top: 0.5rem;
-        }
-
-
-        .animation-logo {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 1.5rem;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .animation-logo img {
-            width: 70%;
-            height: 70%;
-            object-fit: contain;
-        }
-
-        .welcome-text {
-            color: white;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            text-align: center;
-            opacity: 0;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 0.8s ease 0.2s forwards;
-        }
-
-        .tagline {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            opacity: 0;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 0.8s ease 0.4s forwards;
-        }
-
-        .loading-container {
-            width: 100%;
-            margin-bottom: 1.5rem;
-        }
-
-        .loading-bar {
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+        body.loading {
             overflow: hidden;
-            margin-bottom: 0.8rem;
         }
 
-        .loading-progress {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #3b82f6, #10b981);
-            border-radius: 8px;
-            animation: loading 2.5s ease-in-out forwards;
-        }
-
-        .loading-text {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.8rem;
-            text-align: center;
-            opacity: 0;
-            animation: fadeIn 0.8s ease 0.8s forwards;
-        }
-
-        .skip-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.6rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            opacity: 0;
-            backdrop-filter: blur(8px);
-            animation: fadeIn 0.8s ease 1s forwards;
-        }
-
-        .skip-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }*/
-
-
-@keyframes logoPulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        /* Mobile View - Welcome Animation */
+@media (max-width: 768px) {
+    #welcome-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+        background: #000;
     }
-    100% {
-        transform: scale(1.05);
-        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    
+    .welcome-video-bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
     }
-}
-
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(15px);
+    
+    .video-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes loading {
-    0% {
-        width: 0%;
-    }
-    100% {
+    
+    /* Fix body overflow on mobile */
+    body {
+        overflow-x: hidden;
         width: 100%;
     }
 }
 
-@keyframes contentFadeIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Hide main content initially */
-body.loading > *:not(#welcome-animation) {
-    display: none;
-}
-
-body.loading {
-    overflow: hidden;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .welcome-content {
-        padding: 1.5rem;
-        width: 90%;
-        max-width: 400px;
-    }
-    
-    .welcome-text {
-        font-size: 1.6rem;
-    }
-    
-    .tagline {
-        font-size: 1rem;
-    }
-    
-    .animation-logo {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 1rem;
-    }
-}
-
+/* For very small screens */
 @media (max-width: 480px) {
-    .welcome-content {
-        padding: 1.2rem;
-        width: 92%;
-        max-width: 350px;
-    }
-    
-    .welcome-text {
-        font-size: 1.4rem;
-    }
-    
-    .tagline {
-        font-size: 0.9rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .animation-logo {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .skip-btn {
-        padding: 0.5rem 1.2rem;
-        font-size: 0.85rem;
+    .welcome-video-bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
     }
 }
         /* Modern Color Scheme */
@@ -337,14 +159,14 @@ body.loading {
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
         }
-        
+
         /* Header - Glass Type */
         .header {
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             color: var(--dark);
-            padding: 0.8rem 1.5rem ;
+            padding: 0.8rem 1.5rem;
             box-shadow: var(--shadow);
             position: sticky;
             top: 0;
@@ -353,7 +175,8 @@ body.loading {
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            flex-wrap: wrap; /* allows wrapping on smaller screens */
+            flex-wrap: wrap;
+            /* allows wrapping on smaller screens */
         }
 
         .header a {
@@ -369,6 +192,7 @@ body.loading {
             display: flex;
             align-items: center;
         }
+
         .logo img {
             height: 120px;
             width: auto;
@@ -457,7 +281,8 @@ body.loading {
 
         /* Mobile Menu Toggle - FIXED */
         .menu-toggle {
-            display: none; /* Hidden by default */
+            display: none;
+            /* Hidden by default */
             flex-direction: column;
             justify-content: space-around;
             width: 30px;
@@ -500,16 +325,16 @@ body.loading {
                 padding: 0.8rem 1.5rem;
                 flex-wrap: wrap;
             }
-            
+
             .logo img {
                 height: 70px;
             }
-            
+
             /* Show menu toggle on mobile */
             .menu-toggle {
                 display: flex;
             }
-            
+
             /* Hide regular nav on mobile */
             .nav {
                 display: none;
@@ -525,18 +350,18 @@ body.loading {
                 z-index: 100;
                 gap: 0.5rem;
             }
-            
+
             .nav.active {
                 display: flex;
             }
-            
+
             .nav-link {
                 padding: 0.8rem;
                 text-align: center;
                 font-size: 16px;
                 border-radius: var(--rounded-sm);
             }
-            
+
             /* Hide contact info on mobile */
             .contact-info {
                 display: none;
@@ -552,11 +377,11 @@ body.loading {
                 z-index: 99;
                 gap: 0.8rem;
             }
-            
+
             .contact-info.active {
                 display: flex;
             }
-            
+
             .contact-item {
                 padding: 0.6rem;
                 justify-content: center;
@@ -568,21 +393,21 @@ body.loading {
             .header {
                 padding: 0.6rem 1rem;
             }
-            
+
             .logo img {
                 height: 60px;
             }
-            
+
             .menu-toggle {
                 right: 1rem;
                 top: 1.2rem;
             }
-            
+
             .nav-link {
                 font-size: 15px;
                 padding: 0.7rem;
             }
-            
+
             .contact-item {
                 font-size: 14px;
             }
@@ -617,82 +442,99 @@ body.loading {
             0% {
                 box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
             }
+
             70% {
                 box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
             }
+
             100% {
                 box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
             }
         }
+
         .social-sidebar {
-           position: fixed;
-           left: 0;
-           top: 0;
-           height: 100vh;
-           width: 30px; /* Adjust width as needed */
-           z-index: 100;
-           display: flex;
-           flex-direction: column;
-           align-items: center;
-           justify-content: center;
-    
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 30px;
+            /* Adjust width as needed */
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
         }
 
         .sidebar-bg {
-           position: absolute;
-           width: 100%;
-           height: 100%;
-           background-size: cover;
-           background-position: center;
-           opacity: 0.7; /* Adjust transparency */
-           z-index: -1;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7;
+            /* Adjust transparency */
+            z-index: -1;
         }
 
         .social-icons {
-           display: flex;
-           flex-direction: column;
-           gap: 15px;
-           padding: 20px 10px;
-           border-radius: 0 12px 12px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px 10px;
+            border-radius: 0 12px 12px 0;
         }
 
         .social-link {
-           display: flex;
-           align-items: center;
-           justify-content: center;
-           width: 40px;
-           height: 40px;
-           border-radius: 50%;
-           background: rgba(255, 255, 255, 0.2);
-           backdrop-filter: blur(10px);
-           -webkit-backdrop-filter: blur(10px);
-           border: 1px solid rgba(255, 255, 255, 0.3);
-           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-           transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
         .social-link i {
-           color: white;
-           font-size: 18px;
-           text-shadow: 0 0 8px rgba(0,0,0,0.3);
+            color: white;
+            font-size: 18px;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
         }
 
         /* Hover Effects */
         .social-link:hover {
-           transform: scale(1.15);
-           background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.15);
+            background: rgba(255, 255, 255, 0.3);
         }
 
         /* Individual Icon Colors on Hover */
-        .social-link.facebook:hover { background: rgba(59, 89, 152, 0.5); }
-        .social-link.twitter:hover { background: rgba(29, 161, 242, 0.5); }
-        .social-link.instagram:hover { 
-            background: linear-gradient(45deg, 
-        rgba(225, 48, 108, 0.5), 
-        rgba(253, 228, 0, 0.5));
+        .social-link.facebook:hover {
+            background: rgba(59, 89, 152, 0.5);
         }
-        .social-link.linkedin:hover { background: rgba(0, 119, 181, 0.5); }
-        .social-link.whatsapp:hover { background: rgba(37, 211, 102, 0.5); }
+
+        .social-link.twitter:hover {
+            background: rgba(29, 161, 242, 0.5);
+        }
+
+        .social-link.instagram:hover {
+            background: linear-gradient(45deg,
+                    rgba(225, 48, 108, 0.5),
+                    rgba(253, 228, 0, 0.5));
+        }
+
+        .social-link.linkedin:hover {
+            background: rgba(0, 119, 181, 0.5);
+        }
+
+        .social-link.whatsapp:hover {
+            background: rgba(37, 211, 102, 0.5);
+        }
 
         /* Hero Section */
         .hero {
@@ -705,6 +547,7 @@ body.loading {
             margin: 2rem;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
         .hero-title {
             font-size: 3rem;
             font-weight: 800;
@@ -725,40 +568,40 @@ body.loading {
             justify-content: center;
         }
 
-       .btn {
-      border: none;
-      padding: 0.5rem 0.9rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: background 0.3s ease;
-      
-    }
+        .btn {
+            border: none;
+            padding: 0.5rem 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
 
-/* Primary Glass Button */
-.btn-primary {
-    background: rgba(9, 84, 214, 0.25);
-    color: white;
-}
+        }
 
-/* Hover Effect */
-.btn-primary:hover {
-    background: rgba(35, 201, 231, 0.4);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
+        /* Primary Glass Button */
+        .btn-primary {
+            background: rgba(9, 84, 214, 0.25);
+            color: white;
+        }
 
-/* Outline Glass Button */
-.btn-outline {
-    background: rgba(9, 84, 214, 0.25);
-    color: white;
-}
+        /* Hover Effect */
+        .btn-primary:hover {
+            background: rgba(35, 201, 231, 0.4);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
 
-.btn-outline:hover {
-    background: rgba(35, 201, 231, 0.4);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
+        /* Outline Glass Button */
+        .btn-outline {
+            background: rgba(9, 84, 214, 0.25);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: rgba(35, 201, 231, 0.4);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
 
 
         /* Main Content */
@@ -929,6 +772,7 @@ body.loading {
             justify-content: center;
             color: #0077b5;
         }
+
         .social-links {
             display: flex;
             gap: 1rem;
@@ -938,11 +782,13 @@ body.loading {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px; /* size of the circle */
+            width: 50px;
+            /* size of the circle */
             height: 50px;
             border-radius: 50%;
             color: white;
-            font-size: 22px; /* icon size */
+            font-size: 22px;
+            /* icon size */
             text-decoration: none;
             transition: transform 0.2s ease;
         }
@@ -952,127 +798,147 @@ body.loading {
         }
 
         /* Background colors for each platform */
-        .social-link.facebook { background-color: #3b5998; }
-        .social-link.twitter { background-color: #1da1f2; }
-        .social-link.instagram { background-color: #e4405f; }
-        .social-link.linkedin { background-color: #0077b5; }
-        .social-link.whatsapp { background-color: #25d366; border: none; cursor: pointer; }
+        .social-link.facebook {
+            background-color: #3b5998;
+        }
+
+        .social-link.twitter {
+            background-color: #1da1f2;
+        }
+
+        .social-link.instagram {
+            background-color: #e4405f;
+        }
+
+        .social-link.linkedin {
+            background-color: #0077b5;
+        }
+
+        .social-link.whatsapp {
+            background-color: #25d366;
+            border: none;
+            cursor: pointer;
+        }
 
 
         /* Features Section - Glassmorphism */
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
-}
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
 
-.feature-card {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: var(--rounded-lg);
-    padding: 2rem;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 
-        0 4px 6px rgba(0, 0, 0, 0.05),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-}
+        .feature-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: var(--rounded-lg);
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.05),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
 
-.feature-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 
-        0 6px 12px rgba(0, 0, 0, 0.1),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-}
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow:
+                0 6px 12px rgba(0, 0, 0, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
 
-.feature-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    color: white;
-    font-size: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-.feature-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
 
-.feature-description {
-    color: black;
-    font-size: 0.95rem;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
+        .feature-description {
+            color: black;
+            font-size: 0.95rem;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
         /* Minimal Glassmorphism Testimonials */
-.testimonials {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    padding: 3rem 1.5rem;
-    margin-bottom: 3rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
+        .testimonials {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            padding: 3rem 1.5rem;
+            margin-bottom: 3rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-.testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
 
-.testimonial-card {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(8px);
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-}
-.testimonial-card:hover {
-    transform: translateY(-5px); /* Only moves up */
-}
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
 
-.testimonial-content {
-    margin-bottom: 1rem;
-    font-style: italic;
-    color: black;
-}
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            /* Only moves up */
+        }
 
-.testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
+        .testimonial-content {
+            margin-bottom: 1rem;
+            font-style: italic;
+            color: black;
+        }
 
-.author-avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
 
-.author-info h4 {
-    font-weight: 600;
-    color: white;
-}
+        .author-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
 
-.author-info p {
-    color: black;
-    font-size: 0.85rem;
-}
+        .author-info h4 {
+            font-weight: 600;
+            color: white;
+        }
+
+        .author-info p {
+            color: black;
+            font-size: 0.85rem;
+        }
+
         /* CTA Section */
         .cta-section {
             background: rgba(37, 99, 235, 0.8);
@@ -1232,8 +1098,13 @@ body.loading {
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .modal-content {
@@ -1246,14 +1117,21 @@ body.loading {
             max-height: 90vh;
             overflow: hidden;
             box-shadow: var(--shadow-xl);
-            display: flex; 
+            display: flex;
             flex-direction: column;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .modal-header {
@@ -1284,11 +1162,11 @@ body.loading {
 
         .modal-body {
             padding: 1.5rem;
-            overflow-y: auto; 
-            flex: 1 1 auto; 
+            overflow-y: auto;
+            flex: 1 1 auto;
             -webkit-overflow-scrolling: touch;
-             scroll-behavior: smooth;
-            
+            scroll-behavior: smooth;
+
         }
 
         .modal-footer {
@@ -1346,19 +1224,22 @@ body.loading {
             }
 
             .modal-content {
-        width: 600px;       /* bigger modal for larger laptops */
-        max-height: 95vh;   /* more height if needed */
-        padding: 2rem;
-    }
+                width: 600px;
+                /* bigger modal for larger laptops */
+                max-height: 95vh;
+                /* more height if needed */
+                padding: 2rem;
+            }
 
-    .modal-title {
-        font-size: 1.25rem; /* slightly bigger title */
-    }
+            .modal-title {
+                font-size: 1.25rem;
+                /* slightly bigger title */
+            }
 
-    .form-control {
-        font-size: 1rem;
-        padding: 0.85rem 1rem;
-    }
+            .form-control {
+                font-size: 1rem;
+                padding: 0.85rem 1rem;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1393,9 +1274,9 @@ body.loading {
             }
 
             .modal-content {
-             max-width: 90%;
-             padding: 1rem;
-    }
+                max-width: 90%;
+                padding: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1412,35 +1293,37 @@ body.loading {
             }
 
             .modal-content {
-             max-width: 95%;
-             padding: 0.8rem;
-    }
+                max-width: 95%;
+                padding: 0.8rem;
+            }
         }
-        .logo img {
-    mix-blend-mode: multiply;
-    background: transparent;
-   }
-   .feature-card-link {
-     text-decoration: none;
-     color: inherit;
-     display: block;
-  }
-         
 
+        .logo img {
+            mix-blend-mode: multiply;
+            background: transparent;
+        }
+
+        .feature-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
     </style>
 </head>
+
 <body>
 
-    <!-- Welcome Animation with Video Background -->
+    <!-- Welcome Animation -->
     <div id="welcome-animation">
-        <!-- Video Background -->
-        <video class="welcome-video-bg" autoplay muted playsinline loop preload="auto">
-            <source src="animation-video.mp4" type="video/mp4">
-          
-            Your browser does not support the video tag.
-        </video>
+        <div class="video-wrapper">
+            <video class="welcome-video-bg" autoplay muted playsinline loop preload="auto">
+                <source src="video-animation (1).mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
         <div class="welcome-overlay"></div>
     </div>
+
 
     <!-- WhatsApp Button -->
     <a href="https://wa.me/919515345553" class="whatsapp-button" target="_blank">
@@ -1449,72 +1332,75 @@ body.loading {
 
     <!-- Header with Glass Effect -->
     <header class="header glass-effect">
-       <!-- Logo -->
-<div class="logo">
-    <a href="index.html">
-        <img src="logo-website.png" alt="Hamsini Tech Solutions Logo" >
-    </a>
-</div>
-<nav class="nav" id="mainNav">
-    <a href="blogs.html" class="nav-link">Blogs</a>
-    <a href="newBatches.html" class="nav-link">New Batches</a>
-    <a href="hire.html" class="nav-link">Hire From Us</a>
-</nav>
+        <!-- Logo -->
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo-website.png" alt="Hamsini Tech Solutions Logo">
+            </a>
+        </div>
+        <nav class="nav" id="mainNav">
+            <a href="blogs.html" class="nav-link">Blogs</a>
+            <a href="newBatches.html" class="nav-link">New Batches</a>
+            <a href="hire.html" class="nav-link">Hire From Us</a>
+        </nav>
 
-<div class="contact-info" id="contactInfo">
-    <div class="contact-item">
-        <i class="fas fa-phone-alt contact-icon"></i>
-        <a href="https://wa.me/919515345553" target="_blank"><b>+91 9515345553</b></a>
-    </div>
-    <div class="contact-item">
-    <i class="fas fa-envelope contact-icon"></i>
-    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=hamsinitech@gmail.com" target="_blank">
-        <b>hamsinitech@gmail.com</b>
-    </a>
-</div>
+        <div class="contact-info" id="contactInfo">
+            <div class="contact-item">
+                <i class="fas fa-phone-alt contact-icon"></i>
+                <a href="https://wa.me/919515345553" target="_blank"><b>+91 9515345553</b></a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope contact-icon"></i>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=hamsinitech@gmail.com" target="_blank">
+                    <b>hamsinitech@gmail.com</b>
+                </a>
+            </div>
 
-</div>
-<!-- Mobile Menu Toggle - NOW VISIBLE -->
+        </div>
+        <!-- Mobile Menu Toggle - NOW VISIBLE -->
         <button class="menu-toggle" id="menuToggle">
             <span></span>
             <span></span>
             <span></span>
         </button>
- </header>
- 
- 
+    </header>
+
+
     <div class="social-sidebar">
-  <!-- Background Image (will cover left side) -->
-  <div class="sidebar-bg"></div>
-  
-  <!-- Social Icons -->
-  <div class="social-icons">
-    <a href="https://www.facebook.com/share/1DnsTNzDye/" class="social-link facebook" target="_blank">
-        <i class="fab fa-facebook-f"></i>
-    </a>
-    <a href="https://twitter.com/" class="social-link twitter" target="_blank">
-        <i class="fab fa-twitter"></i>
-    </a>
-    <a href="https://www.instagram.com/hamsinitechsolutions?igsh=NHc5dW00ZjBnYnpm" class="social-link instagram" target="_blank">
-        <i class="fab fa-instagram"></i>
-    </a>
-    <a href="https://www.linkedin.com/in/hamsini-tech-solutions-963bbb378/" class="social-link linkedin" target="_blank">
-        <i class="fab fa-linkedin-in"></i>
-    </a>
-    <button class="social-link whatsapp" onclick="openShare('whatsapp')">
-        <i class="fab fa-whatsapp"></i>
-    </button>
-  </div>
-</div>
+        <!-- Background Image (will cover left side) -->
+        <div class="sidebar-bg"></div>
+
+        <!-- Social Icons -->
+        <div class="social-icons">
+            <a href="https://www.facebook.com/share/1DnsTNzDye/" class="social-link facebook" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/" class="social-link twitter" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com/hamsinitechsolutions?igsh=NHc5dW00ZjBnYnpm" class="social-link instagram"
+                target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/hamsini-tech-solutions-963bbb378/" class="social-link linkedin"
+                target="_blank">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <button class="social-link whatsapp" onclick="openShare('whatsapp')">
+                <i class="fab fa-whatsapp"></i>
+            </button>
+        </div>
+    </div>
 
     <!-- Hero Section -->
 
-     <section class="hero glass-effect">
+    <section class="hero glass-effect">
         <h1 class="hero-title">Transform Your Career with Cutting-Edge Tech Training</h1>
-        <p class="hero-subtitle">Join India's leading technology training institute with 100% placement assistance and learn from industry experts</p>
+        <p class="hero-subtitle">Join India's leading technology training institute with 100% placement assistance and
+            learn from industry experts</p>
         <div class="hero-cta">
             <button class="btn btn-primary" onclick="openEnrollModal('General Inquiry')">
-            <i class="fas fa-book-open"></i> Explore Courses
+                <i class="fas fa-book-open"></i> Explore Courses
             </button>
             <button class="btn btn-outline" onclick="openWhatsApp()">
                 <i class="fas fa-phone-alt"></i> Talk to Counselor
@@ -1533,8 +1419,8 @@ body.loading {
 
             <div class="courses-grid">
                 <!-- AWS & DevOps -->
-                <div class="course-card"  onclick="openCoursePage(event, 'awsDevops.html')">
-                     
+                <div class="course-card" onclick="openCoursePage(event, 'awsDevops.html')">
+
                     <div class="course-badge">Popular</div>
                     <div class="course-image-container">
                         <img src="aws.jpg" alt="AWS & DevOps" class="course-image">
@@ -1571,8 +1457,8 @@ body.loading {
 
 
                 <!-- Cyber Security -->
-                <div class="course-card"  onclick="openCoursePage(event, 'cyberSecurity.html')">
-                     
+                <div class="course-card" onclick="openCoursePage(event, 'cyberSecurity.html')">
+
                     <div class="course-badge">Popular</div>
                     <div class="course-image-container">
                         <img src="cyber.jpg" alt="Cyber Security" class="course-image">
@@ -1610,7 +1496,7 @@ body.loading {
 
                 <!-- Azure DevOps -->
                 <div class="course-card" onclick="openCoursePage(event, 'azureDevops.html')">
-                
+
                     <div class="course-image-container">
                         <img src="Azure.jpg" alt="Azure DevOps" class="course-image">
                     </div>
@@ -1646,7 +1532,7 @@ body.loading {
 
                 <!--Gcp Devops -->
                 <div class="course-card" onclick="openCoursePage(event, 'gcpDevops.html')">
-                
+
                     <div class="course-image-container">
                         <img src="gcp.jpg" alt="Mern Stack" class="course-image">
                     </div>
@@ -1678,12 +1564,12 @@ body.loading {
                             </button>
                         </div>
                     </div>
-                </div> 
+                </div>
 
 
                 <!-- Java Full Stack -->
                 <div class="course-card" onclick="openCoursePage(event, 'java.html')">
-                    
+
                     <div class="course-badge">New</div>
                     <div class="course-image-container">
                         <img src="java.png" alt="Java Full Stack" class="course-image">
@@ -1720,7 +1606,7 @@ body.loading {
 
                 <!-- React JS -->
                 <div class="course-card" onclick="openCoursePage(event, 'react.html')">
-                    
+
                     <div class="course-image-container">
                         <img src="react.jpg" alt="React.Js" class="course-image">
                     </div>
@@ -1756,7 +1642,7 @@ body.loading {
 
                 <!-- Generative AI -->
                 <div class="course-card" onclick="openCoursePage(event, 'gen.html')">
-                    
+
                     <div class="course-badge">Trending</div>
                     <div class="course-image-container">
                         <img src="genAI.jpeg" alt="Generative AI" class="course-image">
@@ -1793,7 +1679,7 @@ body.loading {
 
                 <!-- Data Analytics -->
                 <div class="course-card" onclick="openCoursePage(event, 'dataAnalytics.html')">
-                    
+
                     <div class="course-image-container">
                         <img src="DA.jpg" alt="Data Analytics" class="course-image">
                     </div>
@@ -1829,7 +1715,7 @@ body.loading {
 
                 <!-- Data Science -->
                 <div class="course-card" onclick="openCoursePage(event, 'dataScience.html')">
-                    
+
                     <div class="course-badge">Advanced</div>
                     <div class="course-image-container">
                         <img src="DS.jpg" alt="Data Science" class="course-image">
@@ -1866,7 +1752,7 @@ body.loading {
 
                 <!-- Power BI -->
                 <div class="course-card" onclick="openCoursePage(event, 'powerBi.html')">
-                    
+
                     <div class="course-image-container">
                         <img src="pbi.jpg" alt="Power BI" class="course-image">
                     </div>
@@ -1899,10 +1785,10 @@ body.loading {
                         </div>
                     </div>
                 </div>
-            
-            <!-- Mern Stack -->
+
+                <!-- Mern Stack -->
                 <div class="course-card" onclick="openCoursePage(event, 'mernStack.html')">
-                
+
                     <div class="course-image-container">
                         <img src="mernStack.jpeg" alt="Mern Stack" class="course-image">
                     </div>
@@ -1934,8 +1820,8 @@ body.loading {
                             </button>
                         </div>
                     </div>
-                </div> 
-            </div>       
+                </div>
+            </div>
         </section>
 
         <!-- Features Section -->
@@ -1945,56 +1831,56 @@ body.loading {
                 <p class="section-subtitle">We provide the best learning experience to transform your career</p>
             </div>
 
-            
+
             <div class="features-grid">
                 <a href="online.html" class="feature-card-link">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-laptop"></i>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3 class="feature-title">Online Training</h3>
+                        <p class="feature-description">
+                            Live interactive sessions with industry experts from the comfort of your home
+                        </p>
                     </div>
-                    <h3 class="feature-title">Online Training</h3>
-                    <p class="feature-description">
-                        Live interactive sessions with industry experts from the comfort of your home
-                    </p>
-                </div>
-            </a>
+                </a>
 
                 <a href="offline.html" class="feature-card-link">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chalkboard-teacher"></i>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3 class="feature-title">Classroom Training</h3>
+                        <p class="feature-description">
+                            State-of-the-art classrooms with hands-on practical sessions
+                        </p>
                     </div>
-                    <h3 class="feature-title">Classroom Training</h3>
-                    <p class="feature-description">
-                        State-of-the-art classrooms with hands-on practical sessions
-                    </p>
-                </div>
-            </a>
+                </a>
 
                 <a href="assistance.html" class="feature-card-link">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-briefcase"></i>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3 class="feature-title">Job Assistance</h3>
+                        <p class="feature-description">
+                            100% placement support with resume building and mock interviews
+                        </p>
                     </div>
-                    <h3 class="feature-title">Job Assistance</h3>
-                    <p class="feature-description">
-                        100% placement support with resume building and mock interviews
-                    </p>
-                </div>
-            </a>
+                </a>
 
                 <a href="certification.html" class="feature-card-link">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-certificate"></i>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3 class="feature-title">Certification</h3>
+                        <p class="feature-description">
+                            Industry-recognized certifications to boost your career prospects
+                        </p>
                     </div>
-                    <h3 class="feature-title">Certification</h3>
-                    <p class="feature-description">
-                        Industry-recognized certifications to boost your career prospects
-                    </p>
-                </div>
-            </a>
-          </div>
+                </a>
+            </div>
         </section>
 
         <!-- Testimonials -->
@@ -2007,10 +1893,12 @@ body.loading {
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <p class="testimonial-content">
-                        The AWS DevOps course at Hamsini Tech transformed my career. The instructors are industry experts who provided practical knowledge. I got placed in a top MNC with a 300% salary hike!
+                        The AWS DevOps course at Hamsini Tech transformed my career. The instructors are industry
+                        experts who provided practical knowledge. I got placed in a top MNC with a 300% salary hike!
                     </p>
                     <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Sharma" class="author-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Sharma"
+                            class="author-avatar">
                         <div class="author-info">
                             <h4>Rahul Sharma</h4>
                             <p>AWS DevOps Engineer, TCS</p>
@@ -2020,10 +1908,12 @@ body.loading {
 
                 <div class="testimonial-card">
                     <p class="testimonial-content">
-                        The Data Science program was comprehensive and up-to-date with industry trends. The placement team helped me secure a job even before course completion. Highly recommended!
+                        The Data Science program was comprehensive and up-to-date with industry trends. The placement
+                        team helped me secure a job even before course completion. Highly recommended!
                     </p>
                     <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Patel" class="author-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Patel"
+                            class="author-avatar">
                         <div class="author-info">
                             <h4>Priya Patel</h4>
                             <p>Data Scientist, Amazon</p>
@@ -2033,10 +1923,12 @@ body.loading {
 
                 <div class="testimonial-card">
                     <p class="testimonial-content">
-                        The Java Full Stack course gave me the confidence to switch from non-tech to tech role. The hands-on projects were especially valuable during interviews. Thank you Hamsini Tech!
+                        The Java Full Stack course gave me the confidence to switch from non-tech to tech role. The
+                        hands-on projects were especially valuable during interviews. Thank you Hamsini Tech!
                     </p>
                     <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Vikram Singh" class="author-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Vikram Singh"
+                            class="author-avatar">
                         <div class="author-info">
                             <h4>Vikram Singh</h4>
                             <p>Full Stack Developer, Infosys</p>
@@ -2062,24 +1954,29 @@ body.loading {
             <div class="footer-col">
                 <div class="footer-logo">
                     <a href="index.html">
-                    <img src="whats.png" alt="Hamsini Tech Solutions Logo" style="height: 100px; margin-right: 15px; width: auto;">
+                        <img src="whats.png" alt="Hamsini Tech Solutions Logo"
+                            style="height: 100px; margin-right: 15px; width: auto;">
                     </a>
                 </div>
                 <p class="footer-about">
-                    Hamsini Tech Solutions is a premier IT training institute providing industry-relevant courses with 100% placement assistance. We bridge the gap between education and employment.
+                    Hamsini Tech Solutions is a premier IT training institute providing industry-relevant courses with
+                    100% placement assistance. We bridge the gap between education and employment.
                 </p>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/share/1DnsTNzDye/" class="social-link" target="_blank" style="color: #0954d6;">
-                        <i class="fab fa-facebook-f" ></i>
+                    <a href="https://www.facebook.com/share/1DnsTNzDye/" class="social-link" target="_blank"
+                        style="color: #0954d6;">
+                        <i class="fab fa-facebook-f"></i>
                     </a>
                     <a href="https://twitter.com/" class="social-link" target="_blank" style="color: #0077b5;">
-                        <i class="fab fa-twitter" ></i>
+                        <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/hamsini-tech-solutions-963bbb378/" class="social-link" target="_blank" style="color: #3b5998;">
-                        <i class="fab fa-linkedin-in" ></i>
+                    <a href="https://www.linkedin.com/in/hamsini-tech-solutions-963bbb378/" class="social-link"
+                        target="_blank" style="color: #3b5998;">
+                        <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a href="https://www.instagram.com/hamsinitechsolutions?igsh=NHc5dW00ZjBnYnpm" class="social-link" target="_blank" style="color: red;">
-                        <i class="fab fa-instagram" ></i>
+                    <a href="https://www.instagram.com/hamsinitechsolutions?igsh=NHc5dW00ZjBnYnpm" class="social-link"
+                        target="_blank" style="color: red;">
+                        <i class="fab fa-instagram"></i>
                     </a>
                 </div>
             </div>
@@ -2191,7 +2088,8 @@ body.loading {
                 <div class="form-group">
                     <label class="form-label">Share Link</label>
                     <div style="display: flex; gap: 0.5rem;">
-                        <input type="text" id="shareUrl" class="form-control" value="https://hamsini.com/courses" readonly>
+                        <input type="text" id="shareUrl" class="form-control" value="https://hamsini.com/courses"
+                            readonly>
                         <button class="btn btn-primary" onclick="copyLink()">Copy</button>
                     </div>
                 </div>
@@ -2199,16 +2097,19 @@ body.loading {
                     <p style="text-align: center; margin-bottom: 1rem; color: var(--gray-700);">Or share via</p>
                     <div style="display: flex; justify-content: center; gap: 1rem;">
                         <div class="social-links">
-                            <a href="https://www.facebook.com/share/1DnsTNzDye/" class="social-link facebook" target="_blank">
+                            <a href="https://www.facebook.com/share/1DnsTNzDye/" class="social-link facebook"
+                                target="_blank">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
                             <a href="https://twitter.com/" class="social-link twitter" target="_blank">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                            <a href="https://www.instagram.com/hamsinitechsolutions?igsh=NHc5dW00ZjBnYnpm" class="social-link instagram" target="_blank">
+                            <a href="https://www.instagram.com/hamsinitechsolutions?igsh=NHc5dW00ZjBnYnpm"
+                                class="social-link instagram" target="_blank">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="https://www.linkedin.com/in/hamsini-tech-solutions-963bbb378/" class="social-link linkedin" target="_blank">
+                            <a href="https://www.linkedin.com/in/hamsini-tech-solutions-963bbb378/"
+                                class="social-link linkedin" target="_blank">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
                             <button class="social-link whatsapp" onclick="openShare('whatsapp')">
@@ -2222,52 +2123,154 @@ body.loading {
     </div>
 
     <script>
-
-    // Welcome Animation Functions
-    function skipAnimation() {
-    const animation = document.getElementById('welcome-animation');
-    animation.style.opacity = '0';
-    animation.style.visibility = 'hidden';
-    
-    // Remove loading class from body to show all content
-    document.body.classList.remove('loading');
-    document.body.style.overflow = 'auto';
-    document.documentElement.style.overflow = 'auto';
-}
-
-// Initialize the animation sequence
-function initWelcomeAnimation() {
-    const welcomeVideo = document.querySelector('.welcome-video-bg');
-    
-    
-    // Set initial state - body in loading mode
-    document.body.classList.add('loading');
-
-    // Start video playback
-    if (welcomeVideo) {
-        welcomeVideo.play().catch(error => {
-            console.log('Welcome video autoplay failed:', error);
-        });
-    }
-
-    // Auto-complete animation after 3 seconds total
-    setTimeout(() => {
-        skipAnimation();
-    }, 3500);
-}
-
-// Start the animation when page loads
-window.addEventListener('load', initWelcomeAnimation);
-
-// Also add this to handle cases where video might not load
-window.addEventListener('DOMContentLoaded', function() {
-    // Fallback: if welcome animation takes too long, auto-skip after 5 seconds
-    setTimeout(() => {
-        if (document.body.classList.contains('loading')) {
-            skipAnimation();
+            // Video handling with multiple approaches
+        let currentVideoMethod = 'background';
+        let videoErrors = [];
+        
+        function handleVideoError(method) {
+            console.log(`Video error in ${method} method`);
+            videoErrors.push(method);
+            
+            // Hide the failed video method
+            if (method === 'background') {
+                document.querySelector('.video-background').style.display = 'none';
+            } else if (method === 'centered') {
+                document.querySelector('.video-centered').style.display = 'none';
+            } else if (method === 'responsive') {
+                document.querySelector('.video-responsive').style.display = 'none';
+            }
+            
+            // If all methods fail, ensure fallback is visible
+            if (videoErrors.length >= 2) {
+                document.querySelector('.video-fallback').style.display = 'flex';
+            }
         }
-    }, 5000);
-});
+        
+        // Welcome Animation Functions
+        function skipAnimation() {
+            const animation = document.getElementById('welcome-animation');
+            animation.style.opacity = '0';
+            animation.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                animation.style.display = 'none';
+                document.body.classList.remove('loading');
+            }, 500);
+        }
+        
+        // Initialize video based on device type
+        function initWelcomeAnimation() {
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // Mobile: Use background method
+                document.querySelector('.video-background').style.display = 'block';
+                document.querySelector('.video-centered').style.display = 'none';
+                document.querySelector('.video-responsive').style.display = 'none';
+                currentVideoMethod = 'background';
+            } else {
+                // Desktop: Use responsive method
+                document.querySelector('.video-background').style.display = 'none';
+                document.querySelector('.video-centered').style.display = 'none';
+                document.querySelector('.video-responsive').style.display = 'flex';
+                currentVideoMethod = 'responsive';
+            }
+            
+            // Try to play videos
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                if (video.style.display !== 'none') {
+                    const playPromise = video.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.log('Video autoplay failed:', error);
+                        });
+                    }
+                }
+            });
+            
+            // Auto-skip after 4 seconds
+            setTimeout(skipAnimation, 4000);
+        }
+        
+        // Handle orientation and resize changes
+        window.addEventListener('resize', function() {
+            // Re-initialize video method on orientation change
+            if (window.innerWidth <= 768) {
+                document.querySelector('.video-background').style.display = 'block';
+                document.querySelector('.video-centered').style.display = 'none';
+                document.querySelector('.video-responsive').style.display = 'none';
+            } else {
+                document.querySelector('.video-background').style.display = 'none';
+                document.querySelector('.video-centered').style.display = 'none';
+                document.querySelector('.video-responsive').style.display = 'flex';
+            }
+        });
+
+    
+        // Remove loading class from body to show all content
+        document.body.classList.remove('loading');
+        document.body.style.overflow = 'auto';
+        document.documentElement.style.overflow = 'auto';
+    
+        // Welcome Animation Functions
+        function skipAnimation() {
+            const animation = document.getElementById('welcome-animation');
+            animation.style.opacity = '0';
+            animation.style.visibility = 'hidden';
+
+            // Remove loading class from body to show all content
+            document.body.classList.remove('loading');
+            document.body.style.overflow = 'auto';
+            document.documentElement.style.overflow = 'auto';
+        }
+
+        // Initialize the animation sequence
+        function initWelcomeAnimation() {
+            const welcomeVideo = document.querySelector('.welcome-video-bg');
+
+
+            // Set initial state - body in loading mode
+            document.body.classList.add('loading');
+
+            // Start video playback
+            if (welcomeVideo) {
+                welcomeVideo.play().catch(error => {
+                    console.log('Welcome video autoplay failed:', error);
+                });
+            }
+
+            // Auto-complete animation after 3 seconds total
+            setTimeout(() => {
+                skipAnimation();
+            }, 3500);
+        }
+
+        // Start the animation when page loads
+        window.addEventListener('load', initWelcomeAnimation);
+
+        // Also add this to handle cases where video might not load
+        window.addEventListener('DOMContentLoaded', function () {
+            // Fallback: if welcome animation takes too long, auto-skip after 5 seconds
+            setTimeout(() => {
+                if (document.body.classList.contains('loading')) {
+                    skipAnimation();
+                }
+            }, 5000);
+        });
+
+        // Enhanced event listeners
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM loaded - initializing animation');
+            initWelcomeAnimation();
+         });
+
+        
+
+        
+        
+
+
         // WhatsApp Functions
         function openWhatsApp() {
             const phoneNumber = "+91 9515345553";
@@ -2276,8 +2279,8 @@ window.addEventListener('DOMContentLoaded', function() {
             window.open(url, '_blank');
         }
         function openCoursePage(event, url) {
-             if (!event.target.closest("button")) {
-             window.location.href = url;
+            if (!event.target.closest("button")) {
+                window.location.href = url;
             }
         }
 
@@ -2299,55 +2302,55 @@ window.addEventListener('DOMContentLoaded', function() {
             document.getElementById('shareModal').style.display = 'none';
         }
 
-    function submitEnrollForm() {
-    const course = document.getElementById('courseName').value;  
-    const name = document.getElementById('enrollName').value.trim();
-    const mobile = document.getElementById('enrollMobile').value.trim();
-    const email = document.getElementById('enrollEmail').value.trim();
-    const batch = document.getElementById('enrollBatch').value;
+        function submitEnrollForm() {
+            const course = document.getElementById('courseName').value;
+            const name = document.getElementById('enrollName').value.trim();
+            const mobile = document.getElementById('enrollMobile').value.trim();
+            const email = document.getElementById('enrollEmail').value.trim();
+            const batch = document.getElementById('enrollBatch').value;
 
-    if (!name || !mobile || !email) {
-        alert('Please fill in all required fields.');
-        return;
-    }
+            if (!name || !mobile || !email) {
+                alert('Please fill in all required fields.');
+                return;
+            }
 
-    // ✅ NEW: Send data to Spring Boot backend
-    const data = {
-        course: course,
-        fullName: name,
-        mobile: mobile,
-        email: email,
-        batch : batch
-    };
+            // ✅ NEW: Send data to Spring Boot backend
+            const data = {
+                course: course,
+                fullName: name,
+                mobile: mobile,
+                email: email,
+                batch: batch
+            };
 
-    fetch("https://www.hamsinitechsolutions.com/api/enroll", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.text())
-    .then(response => {
-        console.log("Server Response:", response);
-    })
-    .catch(error => {
-        console.error("Error sending to backend:", error);
-    });
+            fetch("https://www.hamsinitechsolutions.com/api/enroll", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.text())
+                .then(response => {
+                    console.log("Server Response:", response);
+                })
+                .catch(error => {
+                    console.error("Error sending to backend:", error);
+                });
 
-    // ✅ Your existing WhatsApp message logic
-    const whatsappMessage = `New Enrollment Request:\n\nName: ${name}\nMobile: ${mobile}\nEmail: ${email}\nCourse: ${course}`;
-    const whatsappUrl = `https://wa.me/919515345553?text=${encodeURIComponent(whatsappMessage)}`;
-    window.open(whatsappUrl, '_blank');
+            // ✅ Your existing WhatsApp message logic
+            const whatsappMessage = `New Enrollment Request:\n\nName: ${name}\nMobile: ${mobile}\nEmail: ${email}\nCourse: ${course}`;
+            const whatsappUrl = `https://wa.me/919515345553?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
 
-    alert(`Thank you for your interest!\n\nWe've received your application for ${course}. Our counselor will contact you shortly at ${mobile}.`);
-    closeEnrollModal();
+            alert(`Thank you for your interest!\n\nWe've received your application for ${course}. Our counselor will contact you shortly at ${mobile}.`);
+            closeEnrollModal();
 
-    // Reset form
-    document.getElementById('enrollName').value = '';
-    document.getElementById('enrollMobile').value = '';
-    document.getElementById('enrollEmail').value = '';
-  }
+            // Reset form
+            document.getElementById('enrollName').value = '';
+            document.getElementById('enrollMobile').value = '';
+            document.getElementById('enrollEmail').value = '';
+        }
 
         function copyLink() {
             const linkInput = document.getElementById('shareUrl');
@@ -2369,7 +2372,7 @@ window.addEventListener('DOMContentLoaded', function() {
             let shareUrl = '';
             let windowSize = 'width=600,height=400';
 
-            switch(platform) {
+            switch (platform) {
                 case 'facebook':
                     shareUrl = `https://www.facebook.com/profile.php?id=61578204434186/`;
                     break;
@@ -2395,7 +2398,7 @@ window.addEventListener('DOMContentLoaded', function() {
         }
 
         // Close modals when clicking outside
-        window.addEventListener('click', function(event) {
+        window.addEventListener('click', function (event) {
             if (event.target === document.getElementById('enrollModal')) {
                 closeEnrollModal();
             }
@@ -2405,7 +2408,7 @@ window.addEventListener('DOMContentLoaded', function() {
         });
 
         // Search functionality
-        document.querySelector('.search-box input')?.addEventListener('input', function() {
+        document.querySelector('.search-box input')?.addEventListener('input', function () {
             const searchTerm = this.value.toLowerCase();
             const courseCards = document.querySelectorAll('.course-card');
 
@@ -2422,42 +2425,43 @@ window.addEventListener('DOMContentLoaded', function() {
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
         const contactInfo = document.getElementById('contactInfo');
-        
-        menuToggle.addEventListener('click', function(e) {
+
+        menuToggle.addEventListener('click', function (e) {
             e.stopPropagation();
             this.classList.toggle('active');
             mainNav.classList.toggle('active');
             contactInfo.classList.toggle('active');
         });
-        
+
         // Close menus when clicking outside
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             const isClickInsideHeader = event.target.closest('.header');
-            
+
             if (!isClickInsideHeader) {
                 menuToggle.classList.remove('active');
                 mainNav.classList.remove('active');
                 contactInfo.classList.remove('active');
             }
         });
-        
+
         // Prevent closing when clicking inside the menu
-        mainNav.addEventListener('click', function(e) {
+        mainNav.addEventListener('click', function (e) {
             e.stopPropagation();
         });
-        
-        contactInfo.addEventListener('click', function(e) {
+
+        contactInfo.addEventListener('click', function (e) {
             e.stopPropagation();
         });
     </script>
     <!--Google Tag-->
-  <script src="https://www.googletagmaager.com/gtag/js?id=AW-1723638866"></script>
-  <script>
-    window.dataLayer=window.dataLayer || [];
-    function gtag() {dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script src="https://www.googletagmaager.com/gtag/js?id=AW-1723638866"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'AW-1743638866');
-  </script>
+        gtag('config', 'AW-1743638866');
+    </script>
 </body>
+
 </html>

@@ -207,10 +207,10 @@ header {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      const res = await fetch("https://www.hamsinitechsolutions.com/api/admin/login", {
+      const res = await fetch("http://www.hamsinitechsolutions.com/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({username: email, password })
+        body: JSON.stringify({ email, password })
       });
 
       if (res.ok) {
