@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
-                 /* Welcome Animation - Mobile First Approach */
+        /* Welcome Animation - Mobile First Approach */
         #welcome-animation {
             position: fixed;
             top: 0;
@@ -51,7 +51,7 @@
         }
 
         /* Hide main content initially */
-        body.loading > *:not(#welcome-animation) {
+        body.loading>*:not(#welcome-animation) {
             display: none;
         }
 
@@ -60,48 +60,49 @@
         }
 
         /* Mobile View - Welcome Animation */
-    @media (max-width: 768px) {
-    #welcome-animation {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        background: #000;
-    }
-    
-    .welcome-video-bg {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center center;
-    }
-    
-    .video-wrapper {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-    
-    /* Fix body overflow on mobile */
-    body {
-        overflow-x: hidden;
-        width: 100%;
-    }
-}
+        @media (max-width: 768px) {
+            #welcome-animation {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 9999;
+                background: #000;
+            }
 
-/* For very small screens */
-@media (max-width: 480px) {
-    .welcome-video-bg {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center center;
-    }
-}
+            .welcome-video-bg {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center center;
+            }
+
+            .video-wrapper {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* Fix body overflow on mobile */
+            body {
+                overflow-x: hidden;
+                width: 100%;
+            }
+        }
+
+        /* For very small screens */
+        @media (max-width: 480px) {
+            .welcome-video-bg {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center center;
+            }
+        }
+
         /* Modern Color Scheme */
         :root {
             --primary: #2563eb;
@@ -276,7 +277,20 @@
         }
 
         .contact-icon {
-            color: var(--secondary);
+            color: #EA4335;
+            /* Default red */
+        }
+
+        .contact-item:last-child .contact-icon {
+            background: linear-gradient(45deg, #35ea41, #f30808, #4285F4, #FBBC05);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-item:first-child .contact-icon {
+            color: #25d366;
+            /* WhatsApp green for phone */
         }
 
         /* Mobile Menu Toggle - FIXED */
@@ -869,7 +883,7 @@
             font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            color: white;
+            color: rgb(25, 39, 188);
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
@@ -1317,7 +1331,7 @@
     <div id="welcome-animation">
         <div class="video-wrapper">
             <video class="welcome-video-bg" autoplay muted playsinline loop preload="auto">
-                <source src="python-animation.mp4" type="video/mp4">
+                <source src="cyber-animation.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -1894,25 +1908,25 @@
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <p class="testimonial-content">
-                        The AWS DevOps course at Hamsini Tech transformed my career. The instructors are industry
-                        experts who provided practical knowledge. I got placed in a top MNC with a 300% salary hike!
+                        The AWS DevOps training at Hamsini Tech provided excellent industry-relevant skills that
+                        helped me advance my career significantly. The expert instructors delivered practical
+                        knowledge that was immediately applicable in my professional role.
                     </p>
                     <div class="testimonial-author">
-                        
+
                         <div class="author-info">
                             <h4>Kavitha</h4>
-                            <p>AWS DevOps Engineer, Advit Software Solutions</p>
+                            <p>AWS DevOps Engineer, CamelQ Software Solutions Pvt.Ltd</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="testimonial-card">
                     <p class="testimonial-content">
-                        The Data Science program was comprehensive and up-to-date with industry trends. The placement
-                        team helped me secure a job even before course completion. Highly recommended!
-                    </p>
+                        The Data Science program offered comprehensive learning with current industry practices.
+                        The career support team provided exceptional guidance throughout my job search process.
                     <div class="testimonial-author">
-                        
+
                         <div class="author-info">
                             <h4>Akshaya</h4>
                             <p>Data Scientist, Advit Software Solutions</p>
@@ -1922,11 +1936,12 @@
 
                 <div class="testimonial-card">
                     <p class="testimonial-content">
-                        The Java Full Stack course gave me the confidence to switch from non-tech to tech role. The
-                        hands-on projects were especially valuable during interviews. Thank you Hamsini Tech!
+                        The Java Full Stack course equipped me with the necessary skills and confidence to
+                        transition into the technology field. The practical project experience proved valuable
+                        during my career advancement.
                     </p>
                     <div class="testimonial-author">
-                        
+
                         <div class="author-info">
                             <h4>Ramya</h4>
                             <p>Full Stack Developer, Advit Software Solutions</p>
@@ -2121,14 +2136,14 @@
     </div>
 
     <script>
-            // Video handling with multiple approaches
+        // Video handling with multiple approaches
         let currentVideoMethod = 'background';
         let videoErrors = [];
-        
+
         function handleVideoError(method) {
             console.log(`Video error in ${method} method`);
             videoErrors.push(method);
-            
+
             // Hide the failed video method
             if (method === 'background') {
                 document.querySelector('.video-background').style.display = 'none';
@@ -2137,29 +2152,29 @@
             } else if (method === 'responsive') {
                 document.querySelector('.video-responsive').style.display = 'none';
             }
-            
+
             // If all methods fail, ensure fallback is visible
             if (videoErrors.length >= 2) {
                 document.querySelector('.video-fallback').style.display = 'flex';
             }
         }
-        
+
         // Welcome Animation Functions
         function skipAnimation() {
             const animation = document.getElementById('welcome-animation');
             animation.style.opacity = '0';
             animation.style.transition = 'opacity 0.5s ease';
-            
+
             setTimeout(() => {
                 animation.style.display = 'none';
                 document.body.classList.remove('loading');
             }, 500);
         }
-        
+
         // Initialize video based on device type
         function initWelcomeAnimation() {
             const isMobile = window.innerWidth <= 768;
-            
+
             if (isMobile) {
                 // Mobile: Use background method
                 document.querySelector('.video-background').style.display = 'block';
@@ -2173,7 +2188,7 @@
                 document.querySelector('.video-responsive').style.display = 'flex';
                 currentVideoMethod = 'responsive';
             }
-            
+
             // Try to play videos
             const videos = document.querySelectorAll('video');
             videos.forEach(video => {
@@ -2186,13 +2201,13 @@
                     }
                 }
             });
-            
+
             // Auto-skip after 4 seconds
             setTimeout(skipAnimation, 4000);
         }
-        
+
         // Handle orientation and resize changes
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', function () {
             // Re-initialize video method on orientation change
             if (window.innerWidth <= 768) {
                 document.querySelector('.video-background').style.display = 'block';
@@ -2205,12 +2220,12 @@
             }
         });
 
-    
+
         // Remove loading class from body to show all content
         document.body.classList.remove('loading');
         document.body.style.overflow = 'auto';
         document.documentElement.style.overflow = 'auto';
-    
+
         // Welcome Animation Functions
         function skipAnimation() {
             const animation = document.getElementById('welcome-animation');
@@ -2261,12 +2276,12 @@
         document.addEventListener('DOMContentLoaded', function () {
             console.log('DOM loaded - initializing animation');
             initWelcomeAnimation();
-         });
+        });
 
-        
 
-        
-        
+
+
+
 
 
         // WhatsApp Functions
