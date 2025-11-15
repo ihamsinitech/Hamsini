@@ -61,12 +61,6 @@
       max-width: 1000px;
       margin-left: auto;
       margin-right: auto;
-      transition: all 0.3s ease;
-    }
-
-    .folder-container:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     }
 
     .folder-header {
@@ -569,13 +563,12 @@
     let currentDeleteId = null;
     let currentDeleteFileName = null;
     let currentMediaItem = null;
-    let currentExpandedFolder = null;
 
     // Load and organize media files into folders
     async function loadMediaFiles() {
       try {
         console.log('Loading media files from API...');
-        const response = await fetch('https://www.hamsinitechsolutions.com/api/admin/media');
+        const response = await fetch('http://localhost:8081/api/admin/media');
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -619,7 +612,7 @@
           return;
         }
 
-        // Generate folder HTML - initially collapsed
+        // Generate folder HTML
         foldersContainer.innerHTML = Object.keys(folders).map(monthYear => {
           const folderItems = folders[monthYear];
           const folderId = monthYear.replace(/\s+/g, '-').toLowerCase();
@@ -642,15 +635,15 @@
                     if (isImage) {
                       return `
                         <div class="image-item">
-                          <img src="https://www.hamsinitechsolutions.com/uploads/${item.fileName}" 
+                          <img src="http://localhost:8081/uploads/${item.fileName}" 
                                class="image-preview" 
                                alt="${item.title}"
                                onclick="previewMedia(${JSON.stringify(item).replace(/"/g, '&quot;')})"
                                onerror="this.onerror=null; this.src='https://via.placeholder.com/200x200/333/fff?text=Image+Error'; console.error('Failed to load: ${item.fileName}')">
                           <div class="image-overlay">
                             <div class="image-actions">
-                              <button class="action-btn" onclick="event.stopPropagation(); previewMedia(${JSON.stringify(item).replace(/"/g, '&quot;')})">View</button>
-                              <button class="action-btn delete-btn" onclick="event.stopPropagation(); openDeleteModal(${item.id}, '${item.title}', '${item.fileName}')">Delete</button>
+                              <button class="action-btn" onclick="previewMedia(${JSON.stringify(item).replace(/"/g, '&quot;')})">View</button>
+                              <button class="action-btn delete-btn" onclick="openDeleteModal(${item.id}, '${item.title}', '${item.fileName}')">Delete</button>
                             </div>
                           </div>
                         </div>
@@ -665,8 +658,8 @@
                           </div>
                           <div class="image-overlay">
                             <div class="image-actions">
-                              <button class="action-btn" onclick="event.stopPropagation(); previewMedia(${JSON.stringify(item).replace(/"/g, '&quot;')})">View</button>
-                              <button class="action-btn delete-btn" onclick="event.stopPropagation(); openDeleteModal(${item.id}, '${item.title}', '${item.fileName}')">Delete</button>
+                              <button class="action-btn" onclick="previewMedia(${JSON.stringify(item).replace(/"/g, '&quot;')})">View</button>
+                              <button class="action-btn delete-btn" onclick="openDeleteModal(${item.id}, '${item.title}', '${item.fileName}')">Delete</button>
                             </div>
                           </div>
                         </div>
@@ -679,13 +672,14 @@
           `;
         }).join('');
         
-        // Don't auto-expand any folder initially
-        // Folders will be collapsed by default
+        // Auto-expand the first folder
+        const firstFolderId = Object.keys(folders)[0].replace(/\s+/g, '-').toLowerCase();
+        setTimeout(() => toggleFolder(firstFolderId), 100);
         
       } catch (error) {
         console.error('Error loading media:', error);
         document.getElementById('foldersContainer').innerHTML = 
-          '<div class="error-message">Error loading media files. Please check if the server is running on  https://www.hamsinitechsolutions.com.</div>';
+          '<div class="error-message">Error loading media files. Please check if the server is running on localhost:8081.</div>';
       }
     }
 
@@ -723,25 +717,8 @@
       const folderContent = document.getElementById(folderId);
       const folderIcon = folderContent.previousElementSibling.querySelector('.folder-icon');
       
-      // Close previously expanded folder if any
-      if (currentExpandedFolder && currentExpandedFolder !== folderId) {
-        const prevFolderContent = document.getElementById(currentExpandedFolder);
-        const prevFolderIcon = prevFolderContent.previousElementSibling.querySelector('.folder-icon');
-        
-        prevFolderContent.classList.remove('expanded');
-        prevFolderIcon.classList.remove('expanded');
-      }
-      
-      // Toggle current folder
       folderContent.classList.toggle('expanded');
       folderIcon.classList.toggle('expanded');
-      
-      // Update current expanded folder
-      if (folderContent.classList.contains('expanded')) {
-        currentExpandedFolder = folderId;
-      } else {
-        currentExpandedFolder = null;
-      }
     }
 
     // Enhanced Preview media function
@@ -758,14 +735,14 @@
       // Set modal content based on media type
       if (item.type === 'image' || item.type === 'auto') {
         modalContent.innerHTML = `
-          <img src="https://www.hamsinitechsolutions.com/uploads/${item.fileName}" 
+          <img src="http://localhost:8081/uploads/${item.fileName}" 
                class="modal-media" 
                alt="${item.title}"
                onerror="alert('Failed to load image. Please check the console for details.'); console.error('Image load failed: ${item.fileName}')">`;
       } else if (item.type === 'video') {
         modalContent.innerHTML = `
           <video controls class="modal-media">
-            <source src="https://www.hamsinitechsolutions.com/uploads/${item.fileName}" type="video/mp4">
+            <source src="http://localhost:8081/uploads/${item.fileName}" type="video/mp4">
             Your browser does not support the video tag.
           </video>`;
       } else {
@@ -784,7 +761,7 @@
     function downloadImage() {
       if (currentMediaItem) {
         const link = document.createElement('a');
-        link.href = `https://www.hamsinitechsolutions.com/uploads/${currentMediaItem.fileName}`;
+        link.href = `http://localhost:8081/uploads/${currentMediaItem.fileName}`;
         link.download = currentMediaItem.originalFileName || currentMediaItem.fileName;
         document.body.appendChild(link);
         link.click();
@@ -825,7 +802,7 @@
     async function confirmDelete() {
       if (currentDeleteId) {
         try {
-          const response = await fetch(`https://www.hamsinitechsolutions.com/api/admin/media/delete/${currentDeleteId}`, {
+          const response = await fetch(`http://localhost:8081/api/admin/media/delete/${currentDeleteId}`, {
             method: 'POST'
           });
           
